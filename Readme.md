@@ -71,7 +71,7 @@ BATTAR
 
 <!-- Subtitle -->
 <text x="400" y="135" text-anchor="middle" font-family="monospace" font-size="12" fill="#888" opacity="0">
-بتّار — RED-CORE TOOLKIT part of
+بتّار —part of RED-CORE TOOLKIT
 <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.8s" fill="freeze"/>
 </text>
 
