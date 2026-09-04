@@ -126,7 +126,7 @@ BATTAR
 
 ---
 
-## 🩸 What is Battar?
+## 🩸 What is Battar بتّار ?
 
 `battar` is a single-file Python CLI that replaces your entire recon toolchain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before handing you the code.
 
