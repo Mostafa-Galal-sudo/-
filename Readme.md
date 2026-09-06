@@ -178,17 +178,19 @@ BATTAR
 
 <br><br>
 
-> *"The blade that doesn't just point at the target — it cuts."*
+> <strong><em>"The blade that doesn't just point at the target — it cuts."</em></strong>
+
+<strong><em>"A sword that stays sheathed teaches nothing — steel is judged only by what it has cut."</em></strong>
 
 **Static & dynamic recon for ELF and PE binaries — built for exploit development.**
 
 <p>
-<a href="#-what-is-battar--بتار">What is it</a> •
-<a href="#-strike-patterns">Strike patterns</a> •
+<a href="#️-what-is-battar--بتّار">What is it</a> •
+<a href="#️-strike-patterns">Strike patterns</a> •
 <a href="#-dynamic-verification">Dynamic verification</a> •
 <a href="#-recon-matrix">Recon matrix</a> •
 <a href="#️-installation">Install</a> •
-<a href="#-usage">Usage</a> •
+<a href="#️-usage">Usage</a> •
 <a href="#-live-demo">Demo</a> •
 <a href="#️-legal--ethical-use">Ethics</a>
 </p>
@@ -197,7 +199,7 @@ BATTAR
 
 ---
 
-## What is Battar / بتّار?
+## 🗡️ What is Battar / بتّار?
 
 `battar` / `بتّار` is a single-file Python CLI that replaces your entire exploit-development recon chain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before ever handing you a script.
 
@@ -212,7 +214,9 @@ Every result is backed by evidence pulled straight from the binary — no guessw
 
 ---
 
-## Strike Patterns
+## ⚔️ Strike Patterns
+
+<strong><em>"Every bladesmith of old knew a single sword could not answer every duel — so they forged more than one edge, each for its own kind of fight."</em></strong>
 
 Battar / بتّار detects which of four exploitation strategies apply and auto-forges a ready-to-run `pwntools` script for each:
 
@@ -357,7 +361,9 @@ Every forged exploit:
 
 ---
 
-## Dynamic Verification
+## 💀 Dynamic Verification
+
+<strong><em>"No smith of old ever sold a blade untested — the edge was proven against the target before it was ever handed to its bearer."</em></strong>
 
 <div align="center">
 
@@ -463,11 +469,11 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 
 </div>
 
-> **Safety:** `--auto-offset` executes the target **locally**. It is off by default. Only run it against binaries you own or are explicitly authorized to test.
+> ⚠️ **Safety:** `--auto-offset` executes the target **locally**. It is off by default. Only run it against binaries you own or are explicitly authorized to test.
 
 ---
 
-## Recon Matrix
+## 📋 Recon Matrix
 
 <div align="center">
 
@@ -489,13 +495,13 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 
 ---
 
-## Requirements
+## 📦 Requirements
 
 - Python 3.8+
 - Linux (dynamic verification and corefile analysis target Linux ELF binaries)
 - `gdb` installed for corefile-based offset detection
 
-## Installation
+## ⚙️ Installation
 
 ```bash
 # Dependencies
@@ -518,7 +524,7 @@ battar <binary> [options]
 
 ---
 
-## Usage
+## 🖥️ Usage
 
 ```bash
 # Full recon, no truncation
@@ -555,7 +561,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ---
 
-## Live Demo
+## 🩸 Live Demo
 
 ```text
  PROTECTIONS (checksec)
@@ -662,7 +668,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 </g>
 
 <text x="300" y="165" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#dc2626" opacity="0" filter="url(#riskGlow)">
-HIGH RISK DETECTED
+⚠ HIGH RISK DETECTED
 <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.7s" fill="freeze"/>
 <animate attributeName="opacity" values="1;0.4;1" dur="0.8s" begin="3.5s" repeatCount="indefinite"/>
 </text>
@@ -672,7 +678,9 @@ HIGH RISK DETECTED
 
 ---
 
-## Design Philosophy
+## 🛡️ Design Philosophy
+
+<strong><em>"The finest swords of history bore no ornament that did not serve the cut — every fuller, every taper, existed to make the blade truer."</em></strong>
 
 - **Nothing without evidence.** Missing gadget? It prints `<FILL IN>` and tells you exactly how to find it. Verification failed? It reports the actual reason — never a silent fallback.
 - **Byte-pattern gadget search.** Any address with the right bytes is a valid ROP target — a plain byte scan across `.text` is correct, fast, and needs no disassembler.
@@ -680,17 +688,17 @@ HIGH RISK DETECTED
 
 ---
 
-## Legal & Ethical Use
+## ⚖️ Legal & Ethical Use
 
 Battar / بتّار is built for **authorized security research, CTF competitions, and testing binaries you own**. The `--auto-offset` exploit-verification pipeline executes the target on your own machine — it never touches a remote host on your behalf.
 
 Running this tool, or any exploit it generates, against systems you do not own or do not have explicit written authorization to test is illegal in most jurisdictions. You are responsible for how you use it.
 
-## Contributing
+## 🤝 Contributing
 
 Issues and pull requests are welcome — new strike patterns, additional secret categories, PE-side exploit support, and bug reports are all fair game. Please include a minimal reproducible binary (or the CTF challenge, if shareable) with any bug report involving the exploit helper.
 
-## License
+## 📄 License
 
 Released under the [MIT License](LICENSE).
 
@@ -776,5 +784,7 @@ Made for the ones who don't stop at recon.
 <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.2s" fill="freeze"/>
 </text>
 </svg>
+
+<strong><em>"A sword is remembered not for the sheath it rested in, but for the battles that proved its edge."</em></strong>
 
 </div>
