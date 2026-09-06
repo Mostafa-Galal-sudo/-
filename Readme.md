@@ -161,8 +161,7 @@ BATTAR
 <text x="350" y="15" text-anchor="middle" font-family="monospace" font-size="10" fill="#666">battar / بتّار — red-core toolkit</text>
 
 <text x="20" y="50" font-family="monospace" font-size="13" fill="#4ade80" filter="url(#termGlow)">
-<tspan fill="#ff2a2a">➜</tspan>
-<tspan dx="8" fill="#a855f7">~</tspan>
+<tspan fill="#ff2a2a">$</tspan>
 <tspan dx="8" fill="#ccc">battar ./chall --section exploit --auto-offset</tspan>
 <animate attributeName="opacity" values="1;0.3;1" dur="1s" begin="3s" repeatCount="indefinite"/>
 </text>
@@ -198,7 +197,7 @@ BATTAR
 
 ---
 
-## 🩸 What is Battar / بتّار?
+## What is Battar / بتّار?
 
 `battar` / `بتّار` is a single-file Python CLI that replaces your entire exploit-development recon chain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before ever handing you a script.
 
@@ -213,7 +212,7 @@ Every result is backed by evidence pulled straight from the binary — no guessw
 
 ---
 
-## ⚡ Strike Patterns
+## Strike Patterns
 
 Battar / بتّار detects which of four exploitation strategies apply and auto-forges a ready-to-run `pwntools` script for each:
 
@@ -241,7 +240,7 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 <text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#ff2a2a" filter="url(#cardGlowA)">STRATEGY A</text>
 <text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Direct ret2system</text>
 <text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">system() + "/bin/sh" in binary</text>
-<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LEAK NEEDED</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">✗ NO LEAK NEEDED</text>
 <path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#ff2a2a" opacity="0.6"/>
 <path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#ff2a2a" opacity="0.6"/>
 <circle cx="150" cy="70" r="50" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
@@ -271,7 +270,7 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 <text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#ff9500" filter="url(#cardGlowB)">STRATEGY B</text>
 <text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Leak, then ret2system</text>
 <text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">puts/printf available to leak libc</text>
-<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#fbbf24" font-weight="bold">✅ LEAK REQUIRED</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#fbbf24" font-weight="bold">✓ LEAK REQUIRED</text>
 <path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#ff9500" opacity="0.6"/>
 <path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#ff9500" opacity="0.6"/>
 <circle cx="150" cy="70" r="50" fill="none" stroke="#ff9500" stroke-width="0.5" opacity="0">
@@ -303,7 +302,7 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 <text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#a855f7" filter="url(#cardGlowC)">STRATEGY C</text>
 <text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Raw execve() syscall</text>
 <text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">"/bin/sh" + syscall gadgets in binary</text>
-<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LIBC NEEDED</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">✗ NO LIBC NEEDED</text>
 <path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#a855f7" opacity="0.6"/>
 <path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#a855f7" opacity="0.6"/>
 <circle cx="150" cy="70" r="50" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0">
@@ -333,7 +332,7 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 <text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#06b6d4" filter="url(#cardGlowD)">STRATEGY D</text>
 <text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">open→read→write flag chain</text>
 <text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">CTF flag + syscall gadgets + .bss</text>
-<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LEAK NEEDED</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">✗ NO LEAK NEEDED</text>
 <path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#06b6d4" opacity="0.6"/>
 <path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#06b6d4" opacity="0.6"/>
 <circle cx="150" cy="70" r="50" fill="none" stroke="#06b6d4" stroke-width="0.5" opacity="0">
@@ -358,7 +357,7 @@ Every forged exploit:
 
 ---
 
-## 🎯 Dynamic Verification
+## Dynamic Verification
 
 <div align="center">
 
@@ -464,39 +463,39 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 
 </div>
 
-> ⚠️ **Safety**: `--auto-offset` executes the target **locally**. It is off by default. Only run it against binaries you own or are explicitly authorized to test.
+> **Safety:** `--auto-offset` executes the target **locally**. It is off by default. Only run it against binaries you own or are explicitly authorized to test.
 
 ---
 
-## 📊 Recon Matrix
+## Recon Matrix
 
 <div align="center">
 
 | Section | ELF | PE |
 | :--- | :---: | :---: |
-| **Build Info** — compiler, linker, Build ID, PDB path | ✅ | ✅ |
-| **Packer Detection** — UPX, ASPack, Themida, VMProtect, entropy heuristics | ✅ | ✅ |
-| **Entropy Analysis** — overall + per-section Shannon entropy with visual bars | ✅ | ✅ |
-| **Symbols / Functions / PLT / GOT** | ✅ | — |
-| **Sections / Imports / Exports** | — | ✅ |
-| **Strings** — fast in-process extraction, no shell-out | ✅ | ✅ |
-| **Interesting Strings** — 19 auto-flagged secret categories | ✅ | ✅ |
-| **Dangerous Functions** — 40+ risky APIs, ranked by severity with reasons | ✅ | ✅ |
-| **ROP Gadgets** — byte-level search across binary + resolved libc | ✅ | — |
-| **Exploit Helper (A–D)** | ✅ x86 / x86-64 | — |
-| **Dynamic Verification** | ✅ x86-64 (full), x86 (offset only) | — |
+| **Build Info** — compiler, linker, Build ID, PDB path | ✓ | ✓ |
+| **Packer Detection** — UPX, ASPack, Themida, VMProtect, entropy heuristics | ✓ | ✓ |
+| **Entropy Analysis** — overall + per-section Shannon entropy with visual bars | ✓ | ✓ |
+| **Symbols / Functions / PLT / GOT** | ✓ | — |
+| **Sections / Imports / Exports** | — | ✓ |
+| **Strings** — fast in-process extraction, no shell-out | ✓ | ✓ |
+| **Interesting Strings** — 19 auto-flagged secret categories | ✓ | ✓ |
+| **Dangerous Functions** — 40+ risky APIs, ranked by severity with reasons | ✓ | ✓ |
+| **ROP Gadgets** — byte-level search across binary + resolved libc | ✓ | — |
+| **Exploit Helper (A–D)** | ✓ x86 / x86-64 | — |
+| **Dynamic Verification** | ✓ x86-64 (full), x86 (offset only) | — |
 
 </div>
 
 ---
 
-## ✅ Requirements
+## Requirements
 
 - Python 3.8+
 - Linux (dynamic verification and corefile analysis target Linux ELF binaries)
 - `gdb` installed for corefile-based offset detection
 
-## 🛠️ Installation
+## Installation
 
 ```bash
 # Dependencies
@@ -519,7 +518,7 @@ battar <binary> [options]
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ```bash
 # Full recon, no truncation
@@ -556,7 +555,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ---
 
-## 📺 Live Demo
+## Live Demo
 
 ```text
  PROTECTIONS (checksec)
@@ -663,7 +662,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 </g>
 
 <text x="300" y="165" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#dc2626" opacity="0" filter="url(#riskGlow)">
-⚠ HIGH RISK DETECTED
+HIGH RISK DETECTED
 <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.7s" fill="freeze"/>
 <animate attributeName="opacity" values="1;0.4;1" dur="0.8s" begin="3.5s" repeatCount="indefinite"/>
 </text>
@@ -673,7 +672,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ---
 
-## 🧠 Design Philosophy
+## Design Philosophy
 
 - **Nothing without evidence.** Missing gadget? It prints `<FILL IN>` and tells you exactly how to find it. Verification failed? It reports the actual reason — never a silent fallback.
 - **Byte-pattern gadget search.** Any address with the right bytes is a valid ROP target — a plain byte scan across `.text` is correct, fast, and needs no disassembler.
@@ -681,17 +680,17 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ---
 
-## ⚖️ Legal & Ethical Use
+## Legal & Ethical Use
 
 Battar / بتّار is built for **authorized security research, CTF competitions, and testing binaries you own**. The `--auto-offset` exploit-verification pipeline executes the target on your own machine — it never touches a remote host on your behalf.
 
 Running this tool, or any exploit it generates, against systems you do not own or do not have explicit written authorization to test is illegal in most jurisdictions. You are responsible for how you use it.
 
-## 🤝 Contributing
+## Contributing
 
 Issues and pull requests are welcome — new strike patterns, additional secret categories, PE-side exploit support, and bug reports are all fair game. Please include a minimal reproducible binary (or the CTF challenge, if shareable) with any bug report involving the exploit helper.
 
-## 📄 License
+## License
 
 Released under the [MIT License](LICENSE).
 
