@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="Battar / بتّار — red-core toolkit" width="900">
+<img src="assets/banner.svg" alt="Battar / بتّار — red-core toolkit" width="900" height="225">
 
 <br>
 
