@@ -5,13 +5,11 @@
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <svg width="100%" height="280" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
 <defs>
-<!-- Matrix rain gradient -->
 <linearGradient id="matrixGrad" x1="0%" y1="0%" x2="0%" y2="100%">
 <stop offset="0%" stop-color="#00ff41" stop-opacity="0"/>
 <stop offset="30%" stop-color="#00ff41" stop-opacity="0.8"/>
 <stop offset="100%" stop-color="#003b00" stop-opacity="0.3"/>
 </linearGradient>
-<!-- Blood blade gradient -->
 <linearGradient id="bloodBlade" x1="0%" y1="0%" x2="100%" y2="0%">
 <stop offset="0%" stop-color="#1a0000"/>
 <stop offset="30%" stop-color="#8b0000"/>
@@ -19,7 +17,6 @@
 <stop offset="85%" stop-color="#ff6666"/>
 <stop offset="100%" stop-color="#ffffff"/>
 </linearGradient>
-<!-- Glow filters -->
 <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
 <feGaussianBlur stdDeviation="4" result="blur1"/>
 <feGaussianBlur stdDeviation="8" result="blur2"/>
@@ -32,54 +29,42 @@
 <filter id="crtBlur">
 <feGaussianBlur stdDeviation="1.2"/>
 </filter>
-<!-- CRT scanline pattern -->
 <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
 <rect x="0" y="0" width="1" height="2" fill="#000" opacity="0.3"/>
 </pattern>
 </defs>
 
-<!-- Background -->
 <rect width="900" height="280" fill="#050505" rx="12"/>
 
-<!-- ═══ MATRIX DIGITAL RAIN ═══ -->
 <g opacity="0.25">
-<!-- Column 1 -->
 <text x="50" y="0" font-family="monospace" font-size="12" fill="#00ff41">
 <animate attributeName="y" from="-50" to="320" dur="3.2s" repeatCount="indefinite"/>
 <tspan>1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan>
 </text>
-<!-- Column 2 -->
 <text x="120" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.7">
 <animate attributeName="y" from="-80" to="320" dur="4.1s" repeatCount="indefinite"/>
 <tspan>0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan>
 </text>
-<!-- Column 3 -->
 <text x="800" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.6">
 <animate attributeName="y" from="-30" to="320" dur="2.8s" repeatCount="indefinite"/>
 <tspan>1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan>
 </text>
-<!-- Column 4 -->
 <text x="850" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.5">
 <animate attributeName="y" from="-100" to="320" dur="3.5s" repeatCount="indefinite"/>
 <tspan>0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan>
 </text>
-<!-- Column 5 -->
 <text x="200" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.4">
 <animate attributeName="y" from="-60" to="320" dur="3.8s" repeatCount="indefinite"/>
 <tspan>1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan>
 </text>
-<!-- Column 6 -->
 <text x="750" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.35">
 <animate attributeName="y" from="-70" to="320" dur="4.5s" repeatCount="indefinite"/>
 <tspan>0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan>
 </text>
 </g>
 
-<!-- CRT Scanlines overlay -->
 <rect width="900" height="280" fill="url(#scanlines)" pointer-events="none"/>
 
-<!-- ═══ SWORD SLASH ANIMATION ═══ -->
-<!-- Primary slash -->
 <path d="M 80 200 Q 280 195, 450 140 Q 620 85, 820 60"
 fill="none" stroke="url(#bloodBlade)" stroke-width="4"
 stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
@@ -88,7 +73,6 @@ stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
 <animate attributeName="opacity" values="1;0.5;1" dur="2.5s" begin="1.8s" repeatCount="indefinite"/>
 </path>
 
-<!-- Secondary slash (cross) -->
 <path d="M 120 80 Q 300 120, 460 150 Q 640 185, 800 210"
 fill="none" stroke="#ff3333" stroke-width="2.5"
 stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
@@ -97,7 +81,6 @@ stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
 <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" begin="2.2s" repeatCount="indefinite"/>
 </path>
 
-<!-- Spark burst at intersection -->
 <g opacity="0">
 <animate attributeName="opacity" values="0;1;0" dur="0.4s" begin="1.6s" repeatCount="indefinite"/>
 <circle cx="460" cy="140" r="4" fill="#ffcc00" filter="url(#neonGlow)"/>
@@ -107,8 +90,6 @@ stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
 <circle cx="445" cy="145" r="2" fill="#ffcc00"/>
 </g>
 
-<!-- ═══ GLITCH TITLE EFFECT ═══ -->
-<!-- Shadow layers for glitch -->
 <text x="452" y="165" text-anchor="middle" font-family="monospace" font-size="52" font-weight="bold" fill="#ff0000" opacity="0" filter="url(#crtBlur)">
 BATTAR
 <animate attributeName="opacity" values="0;0.4;0;0.6;0" dur="0.3s" begin="1.5s" repeatCount="indefinite"/>
@@ -120,7 +101,6 @@ BATTAR
 <animate attributeName="x" values="448;452;448;451;448" dur="0.25s" begin="1.6s" repeatCount="indefinite"/>
 </text>
 
-<!-- Main title -->
 <text x="450" y="165" text-anchor="middle" font-family="monospace" font-size="52" font-weight="bold" fill="#ff2a2a" opacity="0" filter="url(#neonGlow)">
 BATTAR
 <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.2s" fill="freeze"/>
@@ -128,14 +108,12 @@ BATTAR
 <animate attributeName="fill" values="#ff2a2a;#ff6666;#ff2a2a" dur="2.5s" begin="2.5s" repeatCount="indefinite"/>
 </text>
 
-<!-- Subtitle -->
 <text x="450" y="195" text-anchor="middle" font-family="monospace" font-size="13" fill="#888" opacity="0">
 بتّار — RED-CORE TOOLKIT
 <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2s" fill="freeze"/>
 <animate attributeName="opacity" values="1;0.6;1" dur="4s" begin="3s" repeatCount="indefinite"/>
 </text>
 
-<!-- Animated corner brackets -->
 <g opacity="0">
 <animate attributeName="opacity" from="0" to="0.7" dur="0.4s" begin="2.2s" fill="freeze"/>
 <path d="M 30 30 L 70 30 L 70 38 L 38 38 L 38 70 L 30 70 Z" fill="#ff2a2a"/>
@@ -144,7 +122,6 @@ BATTAR
 <path d="M 870 250 L 830 250 L 830 242 L 862 242 L 862 210 L 870 210 Z" fill="#ff2a2a"/>
 </g>
 
-<!-- Target crosshair center -->
 <g opacity="0">
 <animate attributeName="opacity" from="0" to="0.3" dur="0.5s" begin="2.5s" fill="freeze"/>
 <line x1="450" y1="20" x2="450" y2="260" stroke="#ff2a2a" stroke-width="0.5" stroke-dasharray="5,10"/>
@@ -158,22 +135,17 @@ BATTAR
 
 <br>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED BADGES WITH PULSE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <p>
 <img src="https://img.shields.io/badge/python-3.8%2B-ff2a2a?style=flat-square&logo=python&logoColor=white&labelColor=0d0d0d">
 <img src="https://img.shields.io/badge/platform-linux-0d0d0d?style=flat-square&logo=linux&logoColor=ff2a2a">
 <img src="https://img.shields.io/badge/arch-x86%20|%20x86__64-0d0d0d?style=flat-square">
 <img src="https://img.shields.io/badge/exploits-verified%20live-ff2a2a?style=flat-square">
 <img src="https://img.shields.io/badge/license-MIT-ff2a2a?style=flat-square">
+<img src="https://img.shields.io/badge/status-active%20development-ff2a2a?style=flat-square">
 </p>
 
 <br>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED TERMINAL TYPING EFFECT -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <svg width="100%" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
 <defs>
 <filter id="termGlow">
@@ -188,7 +160,6 @@ BATTAR
 <circle cx="45" cy="11" r="4" fill="#27c93f"/>
 <text x="350" y="15" text-anchor="middle" font-family="monospace" font-size="10" fill="#666">battar / بتّار — red-core toolkit</text>
 
-<!-- Typing prompt -->
 <text x="20" y="50" font-family="monospace" font-size="13" fill="#4ade80" filter="url(#termGlow)">
 <tspan fill="#ff2a2a">➜</tspan>
 <tspan dx="8" fill="#a855f7">~</tspan>
@@ -196,12 +167,10 @@ BATTAR
 <animate attributeName="opacity" values="1;0.3;1" dur="1s" begin="3s" repeatCount="indefinite"/>
 </text>
 
-<!-- Blinking cursor -->
 <rect x="560" y="39" width="8" height="14" fill="#4ade80" opacity="0">
 <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3.5s" repeatCount="indefinite"/>
 </rect>
 
-<!-- Response line fading in -->
 <text x="20" y="68" font-family="monospace" font-size="11" fill="#888" opacity="0">
 [✓] VERIFIED WORKING — shell confirmed
 <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="4.5s" fill="freeze"/>
@@ -214,20 +183,33 @@ BATTAR
 
 **Static & dynamic recon for ELF and PE binaries — built for exploit development.**
 
+<p>
+<a href="#-what-is-battar--بتار">What is it</a> •
+<a href="#-strike-patterns">Strike patterns</a> •
+<a href="#-dynamic-verification">Dynamic verification</a> •
+<a href="#-recon-matrix">Recon matrix</a> •
+<a href="#️-installation">Install</a> •
+<a href="#-usage">Usage</a> •
+<a href="#-live-demo">Demo</a> •
+<a href="#️-legal--ethical-use">Ethics</a>
+</p>
+
 </div>
 
 ---
 
 ## 🩸 What is Battar / بتّار?
 
-`battar` / `بتّار` is a single-file Python CLI that replaces your entire recon toolchain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before handing you the code.
+`battar` / `بتّار` is a single-file Python CLI that replaces your entire exploit-development recon chain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before ever handing you a script.
 
 | What others do | What Battar / بتّار does |
 | :--- | :--- |
 | `checksec` says "no canary" | *"No canary → classic overflow viable → here's the exploit"* |
-| `strings` dumps output | Auto-flags **19 secret categories** (keys, JWTs, wallets, creds) |
-| ROPgadget lists gadgets | Builds complete `ret2libc` chains with real addresses filled in |
-| Template generators print code | **Runs the exploit locally**, confirms the shell, then shows it to you |
+| `strings` dumps raw output | Auto-flags **19 secret categories** (keys, JWTs, wallets, credentials) |
+| ROPgadget lists gadgets | Builds complete `ret2libc` chains with real addresses already filled in |
+| Template generators print code | **Runs the exploit locally**, confirms the shell, *then* shows it to you |
+
+Every result is backed by evidence pulled straight from the binary — no guesswork, no hand-waving.
 
 ---
 
@@ -237,9 +219,6 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 
 <div align="center">
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED STRATEGY CARDS WITH 3D ROTATION EFFECT -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <table>
 <tr>
 <td>
@@ -256,7 +235,6 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 </filter>
 </defs>
 <rect width="300" height="140" fill="url(#cardA)" stroke="#ff2a2a" stroke-width="1.5" rx="8" filter="url(#cardGlowA)"/>
-<!-- Animated border shimmer -->
 <rect x="1" y="1" width="298" height="138" fill="none" stroke="#ff2a2a" stroke-width="0.5" rx="7" opacity="0">
 <animate attributeName="opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite"/>
 </rect>
@@ -264,10 +242,8 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 <text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Direct ret2system</text>
 <text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">system() + "/bin/sh" in binary</text>
 <text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LEAK NEEDED</text>
-<!-- Corner accents -->
 <path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#ff2a2a" opacity="0.6"/>
 <path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#ff2a2a" opacity="0.6"/>
-<!-- Pulse ring -->
 <circle cx="150" cy="70" r="50" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
 <animate attributeName="r" from="35" to="65" dur="2.5s" repeatCount="indefinite"/>
 <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
@@ -374,11 +350,11 @@ Battar / بتّار detects which of four exploitation strategies apply and auto
 
 Every forged exploit:
 
-- Auto-fills `system@plt`, gadget addresses, GOT entries
-- Detects `pop rdi; ret` in both binary **and** resolved libc
-- Prefers combined multi-register gadgets for shorter chains
-- Warns if PIE or stack canary breaks the naive approach
-- **Self-verifies** — runs against the target, confirms shell/flag, reports success or exact failure reason
+- Auto-fills `system@plt`, gadget addresses, and GOT entries
+- Detects `pop rdi; ret` in both the binary **and** the resolved libc
+- Prefers combined multi-register gadgets for shorter, more reliable chains
+- Warns when PIE or a stack canary breaks the naive approach
+- **Self-verifies** — runs against the target, confirms shell/flag, and reports success or the exact failure reason
 
 ---
 
@@ -386,9 +362,6 @@ Every forged exploit:
 
 <div align="center">
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ECG HEARTBEAT PIPELINE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <svg width="100%" height="360" viewBox="0 0 750 360" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
 <defs>
 <linearGradient id="ecgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -403,7 +376,6 @@ Every forged exploit:
 
 <rect width="750" height="360" fill="#0a0a0a" rx="10" stroke="#222" stroke-width="1"/>
 
-<!-- Grid lines -->
 <g stroke="#1a1a1a" stroke-width="0.5">
 <line x1="0" y1="60" x2="750" y2="60"/>
 <line x1="0" y1="120" x2="750" y2="120"/>
@@ -416,7 +388,6 @@ Every forged exploit:
 <line x1="600" y1="0" x2="600" y2="360"/>
 </g>
 
-<!-- ECG Line connecting all steps -->
 <path d="M 40 60 L 90 60 L 100 30 L 110 90 L 120 60 L 150 60
 L 160 60 L 170 30 L 180 90 L 190 60 L 220 60
 L 230 60 L 240 30 L 250 90 L 260 60 L 290 60
@@ -431,7 +402,6 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 <animate attributeName="opacity" values="0.8;0.4;0.8" dur="1.5s" begin="3s" repeatCount="indefinite"/>
 </path>
 
-<!-- Step nodes with pulsing -->
 <g>
 <circle cx="75" cy="60" r="10" fill="#ff2a2a" filter="url(#ecgGlow)">
 <animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite"/>
@@ -478,7 +448,6 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 <text x="675" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">movaps align</text>
 </g>
 
-<!-- Detail descriptions -->
 <text x="375" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">
 <tspan x="375" dy="0">Progressively longer cyclic patterns → crash target → read corefile</tspan>
 <tspan x="375" dy="20">Extract exact offset from clobbered registers (PC, RBP, general-purpose)</tspan>
@@ -487,7 +456,6 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 <tspan x="375" dy="20">Auto-fix x86-64 movaps alignment with retry + alignment gadget</tspan>
 </text>
 
-<!-- Bottom status bar -->
 <rect x="30" y="330" width="0" height="4" fill="url(#ecgGrad)" rx="2">
 <animate attributeName="width" from="0" to="690" dur="6s" repeatCount="indefinite"/>
 </rect>
@@ -496,7 +464,7 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 
 </div>
 
-> ⚠️ **Safety**: `--auto-offset` executes the target locally. Off by default. Only use on trusted/authorized binaries.
+> ⚠️ **Safety**: `--auto-offset` executes the target **locally**. It is off by default. Only run it against binaries you own or are explicitly authorized to test.
 
 ---
 
@@ -513,7 +481,7 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 | **Sections / Imports / Exports** | — | ✅ |
 | **Strings** — fast in-process extraction, no shell-out | ✅ | ✅ |
 | **Interesting Strings** — 19 auto-flagged secret categories | ✅ | ✅ |
-| **Dangerous Functions** — 40+ risky APIs by severity with reasons | ✅ | ✅ |
+| **Dangerous Functions** — 40+ risky APIs, ranked by severity with reasons | ✅ | ✅ |
 | **ROP Gadgets** — byte-level search across binary + resolved libc | ✅ | — |
 | **Exploit Helper (A–D)** | ✅ x86 / x86-64 | — |
 | **Dynamic Verification** | ✅ x86-64 (full), x86 (offset only) | — |
@@ -521,6 +489,12 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 </div>
 
 ---
+
+## ✅ Requirements
+
+- Python 3.8+
+- Linux (dynamic verification and corefile analysis target Linux ELF binaries)
+- `gdb` installed for corefile-based offset detection
 
 ## 🛠️ Installation
 
@@ -531,10 +505,16 @@ pip install pwntools pefile capstone
 # Optional but recommended for corefile analysis
 sudo apt install gdb
 
-# Clone & run
-git clone https://github.com/yourname/battar.git
-cd battar
-python battar.py <binary> [options]
+# Clone
+git clone https://github.com/Mostafa-Galal-sudo/BattaR.git
+cd BattaR
+
+# Install as a system-wide `battar` command
+chmod +x battar.py
+sudo cp battar.py /usr/local/bin/battar
+
+# Run from anywhere
+battar <binary> [options]
 ```
 
 ---
@@ -566,11 +546,11 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 | Flag | Description |
 | :--- | :--- |
 | `--section NAME [NAME ...]` | Run only these sections (space-separated). File info & protections always print. |
-| `--all` | Show every entry; disable 40-row truncation |
+| `--all` | Show every entry; disable the 40-row truncation |
 | `--limit N` | Rows per section before truncating (default: `40`) |
 | `--min-len N` | Minimum string length for `--section strings` (default: `4`) |
-| `--auto-offset` | **Execute target locally** to detect overflow offset & verify exploit |
-| `--auto-offset-timeout N` | Crash-detection timeout per attempt (default: `5`) |
+| `--auto-offset` | **Execute target locally** to detect the overflow offset & verify the exploit |
+| `--auto-offset-timeout N` | Crash-detection timeout per attempt, in seconds (default: `5`) |
 
 **Valid sections:** `build`, `packer`, `entropy`, `functions`, `symbols`, `plt`, `got`, `sections`, `imports`, `exports`, `strings`, `interesting`, `dangerous`, `exploit`, `gadgets`
 
@@ -578,7 +558,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ## 📺 Live Demo
 
-```javascript
+```text
  PROTECTIONS (checksec)
 ══════════════════════════════════════════════════════════════════════
   NX                    Enabled
@@ -630,9 +610,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 <div align="center">
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED RISK GAUGE WITH PARTICLE BURST -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <svg width="100%" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
 <defs>
 <linearGradient id="riskGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -649,28 +626,23 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 <rect width="600" height="180" fill="#0a0a0a" rx="10"/>
 
-<!-- Gauge track -->
 <rect x="50" y="80" width="500" height="24" fill="#1a1a1a" rx="12" stroke="#333" stroke-width="1"/>
 
-<!-- Animated fill -->
 <rect x="50" y="80" width="0" height="24" fill="url(#riskGrad)" rx="12" filter="url(#riskGlow)">
 <animate attributeName="width" from="0" to="425" dur="2.5s" fill="freeze"/>
 <animate attributeName="opacity" values="0.9;1;0.9" dur="1s" begin="2.5s" repeatCount="indefinite"/>
 </rect>
 
-<!-- Tick marks -->
 <line x1="50" y1="110" x2="50" y2="118" stroke="#444" stroke-width="1"/>
 <line x1="216" y1="110" x2="216" y2="118" stroke="#444" stroke-width="1"/>
 <line x1="383" y1="110" x2="383" y2="118" stroke="#444" stroke-width="1"/>
 <line x1="550" y1="110" x2="550" y2="118" stroke="#444" stroke-width="1"/>
 
-<!-- Labels -->
 <text x="50" y="135" font-family="monospace" font-size="10" fill="#22c55e">LOW</text>
 <text x="216" y="135" text-anchor="middle" font-family="monospace" font-size="10" fill="#eab308">MEDIUM</text>
 <text x="383" y="135" text-anchor="middle" font-family="monospace" font-size="10" fill="#f97316">HIGH</text>
 <text x="550" y="135" text-anchor="end" font-family="monospace" font-size="10" fill="#dc2626">CRITICAL</text>
 
-<!-- Animated needle -->
 <polygon points="50,68 50,76 60,72" fill="#fff" opacity="0">
 <animate attributeName="points" from="50,68 50,76 60,72" to="465,68 465,76 475,72" dur="2.5s" fill="freeze"/>
 <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2s" fill="freeze"/>
@@ -681,7 +653,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 <animate attributeName="r" values="5;7;5" dur="1s" begin="2.5s" repeatCount="indefinite"/>
 </circle>
 
-<!-- Particle burst at needle position -->
 <g opacity="0">
 <animate attributeName="opacity" values="0;1;0" dur="0.6s" begin="2.8s" repeatCount="indefinite"/>
 <circle cx="465" cy="55" r="2" fill="#ff2a2a"/>
@@ -691,7 +662,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 <circle cx="460" cy="45" r="1.5" fill="#ff6600"/>
 </g>
 
-<!-- Result flash -->
 <text x="300" y="165" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#dc2626" opacity="0" filter="url(#riskGlow)">
 ⚠ HIGH RISK DETECTED
 <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.7s" fill="freeze"/>
@@ -705,9 +675,25 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ## 🧠 Design Philosophy
 
-- **Nothing without evidence.** Missing gadget? Says `<FILL IN>` + tells you exactly how to find it. Verification failed? Reports the actual reason, never silent fallback.
-- **Byte-pattern gadget search.** Any address with the right bytes is a valid ROP target — plain byte scans across `.text` are correct, fast, and need no disassembler.
+- **Nothing without evidence.** Missing gadget? It prints `<FILL IN>` and tells you exactly how to find it. Verification failed? It reports the actual reason — never a silent fallback.
+- **Byte-pattern gadget search.** Any address with the right bytes is a valid ROP target — a plain byte scan across `.text` is correct, fast, and needs no disassembler.
 - **Truncated by default, complete on demand.** Every listing caps at 40 rows with a clear "N more not shown" note; `--all` removes the cap entirely.
+
+---
+
+## ⚖️ Legal & Ethical Use
+
+Battar / بتّار is built for **authorized security research, CTF competitions, and testing binaries you own**. The `--auto-offset` exploit-verification pipeline executes the target on your own machine — it never touches a remote host on your behalf.
+
+Running this tool, or any exploit it generates, against systems you do not own or do not have explicit written authorization to test is illegal in most jurisdictions. You are responsible for how you use it.
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome — new strike patterns, additional secret categories, PE-side exploit support, and bug reports are all fair game. Please include a minimal reproducible binary (or the CTF challenge, if shareable) with any bug report involving the exploit helper.
+
+## 📄 License
+
+Released under the [MIT License](LICENSE).
 
 ---
 
@@ -715,9 +701,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 <br>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- EPIC FINAL: DUAL SWORD CLASH WITH SHOCKWAVE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
 <defs>
 <radialGradient id="shockGrad" cx="50%" cy="50%" r="50%">
@@ -733,7 +716,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 <rect width="500" height="200" fill="#050505" rx="10"/>
 
-<!-- Shockwave rings -->
 <circle cx="250" cy="100" r="10" fill="none" stroke="#ff2a2a" stroke-width="1" opacity="0">
 <animate attributeName="r" from="10" to="120" dur="2s" repeatCount="indefinite"/>
 <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
@@ -747,7 +729,6 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" begin="1.2s" repeatCount="indefinite"/>
 </circle>
 
-<!-- Left sword -->
 <path d="M 80 160 Q 160 130, 230 105 Q 240 100, 245 98"
 fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url(#finalGlow)" opacity="0">
 <animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="1s" begin="0.3s" fill="freeze"/>
@@ -755,7 +736,6 @@ fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url
 <animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="1.5s" repeatCount="indefinite"/>
 </path>
 
-<!-- Right sword -->
 <path d="M 420 160 Q 340 130, 270 105 Q 260 100, 255 98"
 fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url(#finalGlow)" opacity="0">
 <animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="1s" begin="0.5s" fill="freeze"/>
@@ -763,7 +743,6 @@ fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url
 <animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="1.7s" repeatCount="indefinite"/>
 </path>
 
-<!-- Cross guards -->
 <line x1="75" y1="155" x2="90" y2="168" stroke="#ff2a2a" stroke-width="2" opacity="0">
 <animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.2s" fill="freeze"/>
 </line>
@@ -777,7 +756,6 @@ fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url
 <animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.3s" fill="freeze"/>
 </line>
 
-<!-- Impact burst -->
 <g opacity="0">
 <animate attributeName="opacity" values="0;1;0" dur="0.5s" begin="1.4s" repeatCount="indefinite"/>
 <circle cx="250" cy="98" r="8" fill="#ffcc00" filter="url(#finalGlow)"/>
@@ -789,7 +767,6 @@ fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url
 <circle cx="235" cy="95" r="1.5" fill="#ff6600"/>
 </g>
 
-<!-- Closing text -->
 <text x="250" y="145" text-anchor="middle" font-family="monospace" font-size="14" fill="#ff2a2a" opacity="0" filter="url(#finalGlow)">
 Part of the Battar / بتّار red-core toolkit
 <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.8s" fill="freeze"/>
