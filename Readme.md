@@ -367,17 +367,17 @@ fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.
 ## 📦 Requirements
 
 - Python 3.8+
-- Linux (dynamic verification and corefile analysis target Linux ELF binaries)
-- `gdb` installed for corefile-based offset detection
+- Linux (`--auto-offset` executes the target locally and reads its corefile — needs `ulimit -c unlimited` to allow core dumps)
+- Optional: `ROPgadget` or `ropper` installed on `$PATH` — only used as a fallback when a needed gadget isn't found by battar's own byte-scan
 
 ## ⚙️ Installation
 
 ```bash
 # Dependencies
-pip install pwntools pefile capstone
+pip install pwntools pefile
 
-# Optional but recommended for corefile analysis
-sudo apt install gdb
+# Optional fallback gadget search (only used if battar's own scan misses a gadget)
+pip install ROPgadget
 
 # Clone
 git clone https://github.com/Mostafa-Galal-sudo/BattaR.git
@@ -413,6 +413,9 @@ battar ./suspicious.exe --section interesting --min-len 6 --all
 
 # Stripped static binary — what still leaks?
 battar ./target_stripped --section build packer entropy dangerous gadgets --all
+
+# Machine-readable risk summary for a report pipeline / CI
+battar ./chall --json > report.json
 ```
 
 ### CLI Reference
@@ -425,12 +428,21 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 | `--min-len N` | Minimum string length for `--section strings` (default: `4`) |
 | `--auto-offset` | **Execute target locally** to detect the overflow offset & verify the exploit |
 | `--auto-offset-timeout N` | Crash-detection timeout per attempt, in seconds (default: `5`) |
+| `--json` | Print the risk summary as a single JSON object instead of colored terminal output — for piping into a report generator |
 
 **Valid sections:** `build`, `packer`, `entropy`, `functions`, `symbols`, `plt`, `got`, `sections`, `imports`, `exports`, `strings`, `interesting`, `dangerous`, `exploit`, `gadgets`
 
 ---
 
 ## 🩸 Live Demo
+
+<div align="center">
+
+<img src="assets/demo.gif" alt="battar running against a live challenge binary" width="800">
+
+</div>
+
+Text version of the same run, for anywhere GIFs don't load:
 
 ```text
  PROTECTIONS (checksec)
@@ -554,6 +566,7 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 - **Nothing without evidence.** Missing gadget? It prints `<FILL IN>` and tells you exactly how to find it. Verification failed? It reports the actual reason — never a silent fallback.
 - **Byte-pattern gadget search.** Any address with the right bytes is a valid ROP target — a plain byte scan across `.text` is correct, fast, and needs no disassembler.
 - **Truncated by default, complete on demand.** Every listing caps at 40 rows with a clear "N more not shown" note; `--all` removes the cap entirely.
+- **The theme isn't just the README.** Run it in a real terminal (not piped or redirected) and you'll get a short sword-draw intro animation and a live cutting animation while recon is running — both skip themselves automatically on non-interactive output, so scripts and `--json` piping are never polluted with escape codes.
 
 ---
 
