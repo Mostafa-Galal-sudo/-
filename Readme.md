@@ -1,102 +1,170 @@
 <div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED SWORD SLASH HEADER -->
+<!-- EPIC HEADER: Matrix Rain + Sword Slash + Glitch Title -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<svg width="800" height="180" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="280" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
 <defs>
-<linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+<!-- Matrix rain gradient -->
+<linearGradient id="matrixGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#00ff41" stop-opacity="0"/>
+<stop offset="30%" stop-color="#00ff41" stop-opacity="0.8"/>
+<stop offset="100%" stop-color="#003b00" stop-opacity="0.3"/>
+</linearGradient>
+<!-- Blood blade gradient -->
+<linearGradient id="bloodBlade" x1="0%" y1="0%" x2="100%" y2="0%">
 <stop offset="0%" stop-color="#1a0000"/>
-<stop offset="40%" stop-color="#ff1a1a"/>
-<stop offset="70%" stop-color="#ff6666"/>
+<stop offset="30%" stop-color="#8b0000"/>
+<stop offset="60%" stop-color="#ff1a1a"/>
+<stop offset="85%" stop-color="#ff6666"/>
 <stop offset="100%" stop-color="#ffffff"/>
 </linearGradient>
-<filter id="glow">
-<feGaussianBlur stdDeviation="3" result="blur"/>
+<!-- Glow filters -->
+<filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+<feGaussianBlur stdDeviation="4" result="blur1"/>
+<feGaussianBlur stdDeviation="8" result="blur2"/>
 <feMerge>
-<feMergeNode in="blur"/>
-<feMergeNode in="blur"/>
+<feMergeNode in="blur2"/>
+<feMergeNode in="blur1"/>
 <feMergeNode in="SourceGraphic"/>
 </feMerge>
 </filter>
-<filter id="sparks">
-<feGaussianBlur stdDeviation="1.5"/>
+<filter id="crtBlur">
+<feGaussianBlur stdDeviation="1.2"/>
 </filter>
+<!-- CRT scanline pattern -->
+<pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+<rect x="0" y="0" width="1" height="2" fill="#000" opacity="0.3"/>
+</pattern>
 </defs>
 
 <!-- Background -->
-<rect width="800" height="180" fill="#0d0d0d" rx="8"/>
+<rect width="900" height="280" fill="#050505" rx="12"/>
 
-<!-- Sword blade path -->
-<path d="M 80 140 Q 250 135, 400 90 Q 550 45, 720 30"
-fill="none" stroke="url(#bladeGrad)" stroke-width="3"
-stroke-linecap="round" filter="url(#glow)" opacity="0">
-<animate attributeName="stroke-dasharray" from="0,800" to="800,0" dur="1.5s" begin="0.2s" fill="freeze"/>
-<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.2s" fill="freeze"/>
-<animate attributeName="opacity" values="1;0.6;1" dur="2s" begin="2s" repeatCount="indefinite"/>
+<!-- ═══ MATRIX DIGITAL RAIN ═══ -->
+<g opacity="0.25">
+<!-- Column 1 -->
+<text x="50" y="0" font-family="monospace" font-size="12" fill="#00ff41">
+<animate attributeName="y" from="-50" to="320" dur="3.2s" repeatCount="indefinite"/>
+<tspan>1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">0</tspan><tspan x="50" dy="14">1</tspan>
+</text>
+<!-- Column 2 -->
+<text x="120" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.7">
+<animate attributeName="y" from="-80" to="320" dur="4.1s" repeatCount="indefinite"/>
+<tspan>0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">1</tspan><tspan x="120" dy="14">0</tspan><tspan x="120" dy="14">0</tspan>
+</text>
+<!-- Column 3 -->
+<text x="800" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.6">
+<animate attributeName="y" from="-30" to="320" dur="2.8s" repeatCount="indefinite"/>
+<tspan>1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">0</tspan><tspan x="800" dy="14">1</tspan>
+</text>
+<!-- Column 4 -->
+<text x="850" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.5">
+<animate attributeName="y" from="-100" to="320" dur="3.5s" repeatCount="indefinite"/>
+<tspan>0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">0</tspan><tspan x="850" dy="14">1</tspan><tspan x="850" dy="14">0</tspan>
+</text>
+<!-- Column 5 -->
+<text x="200" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.4">
+<animate attributeName="y" from="-60" to="320" dur="3.8s" repeatCount="indefinite"/>
+<tspan>1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan><tspan x="200" dy="14">0</tspan><tspan x="200" dy="14">1</tspan>
+</text>
+<!-- Column 6 -->
+<text x="750" y="0" font-family="monospace" font-size="12" fill="#00ff41" opacity="0.35">
+<animate attributeName="y" from="-70" to="320" dur="4.5s" repeatCount="indefinite"/>
+<tspan>0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">0</tspan><tspan x="750" dy="14">1</tspan><tspan x="750" dy="14">0</tspan>
+</text>
+</g>
+
+<!-- CRT Scanlines overlay -->
+<rect width="900" height="280" fill="url(#scanlines)" pointer-events="none"/>
+
+<!-- ═══ SWORD SLASH ANIMATION ═══ -->
+<!-- Primary slash -->
+<path d="M 80 200 Q 280 195, 450 140 Q 620 85, 820 60"
+fill="none" stroke="url(#bloodBlade)" stroke-width="4"
+stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
+<animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1.2s" begin="0.3s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.3s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.5;1" dur="2.5s" begin="1.8s" repeatCount="indefinite"/>
 </path>
 
-<!-- Second slash (cross) -->
-<path d="M 120 40 Q 280 80, 420 100 Q 580 125, 700 145"
-fill="none" stroke="#ff3333" stroke-width="2"
-stroke-linecap="round" filter="url(#glow)" opacity="0">
-<animate attributeName="stroke-dasharray" from="0,800" to="800,0" dur="1.2s" begin="0.8s" fill="freeze"/>
-<animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="0.8s" fill="freeze"/>
-<animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" begin="2.5s" repeatCount="indefinite"/>
+<!-- Secondary slash (cross) -->
+<path d="M 120 80 Q 300 120, 460 150 Q 640 185, 800 210"
+fill="none" stroke="#ff3333" stroke-width="2.5"
+stroke-linecap="round" filter="url(#neonGlow)" opacity="0">
+<animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1s" begin="0.9s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="0.8" dur="0.2s" begin="0.9s" fill="freeze"/>
+<animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" begin="2.2s" repeatCount="indefinite"/>
 </path>
 
-<!-- Sparks particles -->
-<circle cx="400" cy="90" r="2" fill="#ffcc00" filter="url(#sparks)" opacity="0">
-<animate attributeName="opacity" values="0;1;0" dur="0.6s" begin="1.5s" repeatCount="indefinite"/>
-<animate attributeName="cy" from="90" to="60" dur="0.6s" begin="1.5s" repeatCount="indefinite"/>
-<animate attributeName="cx" from="400" to="430" dur="0.6s" begin="1.5s" repeatCount="indefinite"/>
-</circle>
-<circle cx="420" cy="100" r="1.5" fill="#ff6600" filter="url(#sparks)" opacity="0">
-<animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="1.7s" repeatCount="indefinite"/>
-<animate attributeName="cy" from="100" to="70" dur="0.8s" begin="1.7s" repeatCount="indefinite"/>
-<animate attributeName="cx" from="420" to="450" dur="0.8s" begin="1.7s" repeatCount="indefinite"/>
-</circle>
-<circle cx="380" cy="85" r="1.5" fill="#ffcc00" filter="url(#sparks)" opacity="0">
-<animate attributeName="opacity" values="0;1;0" dur="0.5s" begin="1.6s" repeatCount="indefinite"/>
-<animate attributeName="cy" from="85" to="55" dur="0.5s" begin="1.6s" repeatCount="indefinite"/>
-<animate attributeName="cx" from="380" to="360" dur="0.5s" begin="1.6s" repeatCount="indefinite"/>
-</circle>
+<!-- Spark burst at intersection -->
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;0" dur="0.4s" begin="1.6s" repeatCount="indefinite"/>
+<circle cx="460" cy="140" r="4" fill="#ffcc00" filter="url(#neonGlow)"/>
+<circle cx="470" cy="130" r="2" fill="#ff6600"/>
+<circle cx="450" cy="135" r="2.5" fill="#ffcc00"/>
+<circle cx="465" cy="150" r="1.5" fill="#ff3300"/>
+<circle cx="445" cy="145" r="2" fill="#ffcc00"/>
+</g>
 
-<!-- Title text -->
-<text x="400" y="110" text-anchor="middle" font-family="monospace" font-size="42" font-weight="bold" fill="#ff2a2a" opacity="0">
+<!-- ═══ GLITCH TITLE EFFECT ═══ -->
+<!-- Shadow layers for glitch -->
+<text x="452" y="165" text-anchor="middle" font-family="monospace" font-size="52" font-weight="bold" fill="#ff0000" opacity="0" filter="url(#crtBlur)">
 BATTAR
-<animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.2s" fill="freeze"/>
-<animate attributeName="fill" values="#ff2a2a;#ff6666;#ff2a2a" dur="3s" begin="2.5s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.4;0;0.6;0" dur="0.3s" begin="1.5s" repeatCount="indefinite"/>
+<animate attributeName="x" values="452;448;452;449;452" dur="0.3s" begin="1.5s" repeatCount="indefinite"/>
+</text>
+<text x="448" y="163" text-anchor="middle" font-family="monospace" font-size="52" font-weight="bold" fill="#00ffff" opacity="0" filter="url(#crtBlur)">
+BATTAR
+<animate attributeName="opacity" values="0;0.4;0;0.5;0" dur="0.25s" begin="1.6s" repeatCount="indefinite"/>
+<animate attributeName="x" values="448;452;448;451;448" dur="0.25s" begin="1.6s" repeatCount="indefinite"/>
+</text>
+
+<!-- Main title -->
+<text x="450" y="165" text-anchor="middle" font-family="monospace" font-size="52" font-weight="bold" fill="#ff2a2a" opacity="0" filter="url(#neonGlow)">
+BATTAR
+<animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.2s" fill="freeze"/>
+<animate attributeName="fill" values="#ff2a2a;#ffffff;#ff2a2a" dur="0.1s" begin="1.8s" repeatCount="3"/>
+<animate attributeName="fill" values="#ff2a2a;#ff6666;#ff2a2a" dur="2.5s" begin="2.5s" repeatCount="indefinite"/>
 </text>
 
 <!-- Subtitle -->
-<text x="400" y="135" text-anchor="middle" font-family="monospace" font-size="12" fill="#888" opacity="0">
-بتّار — part of RED-CORE TOOLKIT
-<animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.8s" fill="freeze"/>
+<text x="450" y="195" text-anchor="middle" font-family="monospace" font-size="13" fill="#888" opacity="0">
+بتّار — RED-CORE TOOLKIT
+<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.6;1" dur="4s" begin="3s" repeatCount="indefinite"/>
 </text>
 
-<!-- Decorative corner brackets -->
-<path d="M 20 20 L 50 20 L 50 25 L 25 25 L 25 50 L 20 50 Z" fill="#ff2a2a" opacity="0">
-<animate attributeName="opacity" from="0" to="0.6" dur="0.5s" begin="2s" fill="freeze"/>
-</path>
-<path d="M 780 20 L 750 20 L 750 25 L 775 25 L 775 50 L 780 50 Z" fill="#ff2a2a" opacity="0">
-<animate attributeName="opacity" from="0" to="0.6" dur="0.5s" begin="2.1s" fill="freeze"/>
-</path>
-<path d="M 20 160 L 50 160 L 50 155 L 25 155 L 25 130 L 20 130 Z" fill="#ff2a2a" opacity="0">
-<animate attributeName="opacity" from="0" to="0.6" dur="0.5s" begin="2.2s" fill="freeze"/>
-</path>
-<path d="M 780 160 L 750 160 L 750 155 L 775 155 L 775 130 L 780 130 Z" fill="#ff2a2a" opacity="0">
-<animate attributeName="opacity" from="0" to="0.6" dur="0.5s" begin="2.3s" fill="freeze"/>
-</path>
+<!-- Animated corner brackets -->
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="0.7" dur="0.4s" begin="2.2s" fill="freeze"/>
+<path d="M 30 30 L 70 30 L 70 38 L 38 38 L 38 70 L 30 70 Z" fill="#ff2a2a"/>
+<path d="M 870 30 L 830 30 L 830 38 L 862 38 L 862 70 L 870 70 Z" fill="#ff2a2a"/>
+<path d="M 30 250 L 70 250 L 70 242 L 38 242 L 38 210 L 30 210 Z" fill="#ff2a2a"/>
+<path d="M 870 250 L 830 250 L 830 242 L 862 242 L 862 210 L 870 210 Z" fill="#ff2a2a"/>
+</g>
+
+<!-- Target crosshair center -->
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="0.3" dur="0.5s" begin="2.5s" fill="freeze"/>
+<line x1="450" y1="20" x2="450" y2="260" stroke="#ff2a2a" stroke-width="0.5" stroke-dasharray="5,10"/>
+<line x1="20" y1="140" x2="880" y2="140" stroke="#ff2a2a" stroke-width="0.5" stroke-dasharray="5,10"/>
+<circle cx="450" cy="140" r="30" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0.5">
+<animate attributeName="r" from="20" to="80" dur="3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/>
+</circle>
+</g>
 </svg>
 
+<br>
+
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED BADGES -->
+<!-- ANIMATED BADGES WITH PULSE -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <p>
-<img src="https://img.shields.io/badge/python-3.8%2B-ff2a2a?style=flat-square&logo=python&logoColor=white&labelColor=1a1a1a">
-<img src="https://img.shields.io/badge/platform-linux-1a1a1a?style=flat-square&logo=linux&logoColor=ff2a2a">
-<img src="https://img.shields.io/badge/arch-x86%20|%20x86__64-1a1a1a?style=flat-square">
+<img src="https://img.shields.io/badge/python-3.8%2B-ff2a2a?style=flat-square&logo=python&logoColor=white&labelColor=0d0d0d">
+<img src="https://img.shields.io/badge/platform-linux-0d0d0d?style=flat-square&logo=linux&logoColor=ff2a2a">
+<img src="https://img.shields.io/badge/arch-x86%20|%20x86__64-0d0d0d?style=flat-square">
 <img src="https://img.shields.io/badge/exploits-verified%20live-ff2a2a?style=flat-square">
 <img src="https://img.shields.io/badge/license-MIT-ff2a2a?style=flat-square">
 </p>
@@ -104,21 +172,45 @@ BATTAR
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED PULL-QUOTE -->
+<!-- ANIMATED TERMINAL TYPING EFFECT -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<svg width="600" height="60" viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
 <defs>
-<linearGradient id="quoteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stop-color="#444"/>
-<stop offset="50%" stop-color="#ff2a2a"/>
-<stop offset="100%" stop-color="#444"/>
-</linearGradient>
+<filter id="termGlow">
+<feGaussianBlur stdDeviation="2" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
 </defs>
-<text x="300" y="35" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-style="italic" fill="url(#quoteGrad)">
-"The blade that doesn't just point at the target — it cuts."
-<animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+<rect width="700" height="80" fill="#0a0a0a" stroke="#333" stroke-width="1" rx="6"/>
+<rect x="0" y="0" width="700" height="22" fill="#1a1a1a" rx="6"/>
+<circle cx="15" cy="11" r="4" fill="#ff5f56"/>
+<circle cx="30" cy="11" r="4" fill="#ffbd2e"/>
+<circle cx="45" cy="11" r="4" fill="#27c93f"/>
+<text x="350" y="15" text-anchor="middle" font-family="monospace" font-size="10" fill="#666">battar / بتّار — red-core toolkit</text>
+
+<!-- Typing prompt -->
+<text x="20" y="50" font-family="monospace" font-size="13" fill="#4ade80" filter="url(#termGlow)">
+<tspan fill="#ff2a2a">➜</tspan>
+<tspan dx="8" fill="#a855f7">~</tspan>
+<tspan dx="8" fill="#ccc">battar ./chall --section exploit --auto-offset</tspan>
+<animate attributeName="opacity" values="1;0.3;1" dur="1s" begin="3s" repeatCount="indefinite"/>
+</text>
+
+<!-- Blinking cursor -->
+<rect x="560" y="39" width="8" height="14" fill="#4ade80" opacity="0">
+<animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3.5s" repeatCount="indefinite"/>
+</rect>
+
+<!-- Response line fading in -->
+<text x="20" y="68" font-family="monospace" font-size="11" fill="#888" opacity="0">
+[✓] VERIFIED WORKING — shell confirmed
+<animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="4.5s" fill="freeze"/>
 </text>
 </svg>
+
+<br><br>
+
+> *"The blade that doesn't just point at the target — it cuts."*
 
 **Static & dynamic recon for ELF and PE binaries — built for exploit development.**
 
@@ -126,11 +218,11 @@ BATTAR
 
 ---
 
-## 🩸 What is Battar بتّار ?
+## 🩸 What is Battar / بتّار?
 
-`battar` is a single-file Python CLI that replaces your entire recon toolchain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before handing you the code.
+`battar` / `بتّار` is a single-file Python CLI that replaces your entire recon toolchain. It doesn't just *describe* a binary's weaknesses — it **forges working exploits** and **verifies them live** before handing you the code.
 
-| What others do | What Battar does |
+| What others do | What Battar / بتّار does |
 | :--- | :--- |
 | `checksec` says "no canary" | *"No canary → classic overflow viable → here's the exploit"* |
 | `strings` dumps output | Auto-flags **19 secret categories** (keys, JWTs, wallets, creds) |
@@ -141,43 +233,74 @@ BATTAR
 
 ## ⚡ Strike Patterns
 
-Battar detects which of four exploitation strategies apply and auto-forges a ready-to-run `pwntools` script for each:
+Battar / بتّار detects which of four exploitation strategies apply and auto-forges a ready-to-run `pwntools` script for each:
 
 <div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED STRATEGY CARDS -->
+<!-- ANIMATED STRATEGY CARDS WITH 3D ROTATION EFFECT -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <table>
 <tr>
 <td>
 
-<svg width="280" height="120" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
-<rect width="280" height="120" fill="#0d0d0d" stroke="#ff2a2a" stroke-width="1" rx="6"/>
-<text x="140" y="30" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ff2a2a">STRATEGY A</text>
-<text x="140" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#ccc">Direct ret2system</text>
-<text x="140" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">system() + "/bin/sh" in binary</text>
-<text x="140" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">❌ NO LEAK NEEDED</text>
+<svg width="300" height="140" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="cardA" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#1a0000"/>
+<stop offset="100%" stop-color="#0d0d0d"/>
+</linearGradient>
+<filter id="cardGlowA">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="300" height="140" fill="url(#cardA)" stroke="#ff2a2a" stroke-width="1.5" rx="8" filter="url(#cardGlowA)"/>
+<!-- Animated border shimmer -->
+<rect x="1" y="1" width="298" height="138" fill="none" stroke="#ff2a2a" stroke-width="0.5" rx="7" opacity="0">
+<animate attributeName="opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite"/>
+</rect>
+<text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#ff2a2a" filter="url(#cardGlowA)">STRATEGY A</text>
+<text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Direct ret2system</text>
+<text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">system() + "/bin/sh" in binary</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LEAK NEEDED</text>
+<!-- Corner accents -->
+<path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#ff2a2a" opacity="0.6"/>
+<path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#ff2a2a" opacity="0.6"/>
 <!-- Pulse ring -->
-<circle cx="140" cy="60" r="45" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
-<animate attributeName="r" from="30" to="55" dur="2s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+<circle cx="150" cy="70" r="50" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="35" to="65" dur="2.5s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
 </circle>
 </svg>
 
 </td>
 <td>
 
-<svg width="280" height="120" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
-<rect width="280" height="120" fill="#0d0d0d" stroke="#ff9500" stroke-width="1" rx="6"/>
-<text x="140" y="30" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#ff9500">STRATEGY B</text>
-<text x="140" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#ccc">Leak, then ret2system</text>
-<text x="140" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">puts/printf available to leak libc</text>
-<text x="140" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#fbbf24">✅ LEAK REQUIRED</text>
-<!-- Pulse ring -->
-<circle cx="140" cy="60" r="45" fill="none" stroke="#ff9500" stroke-width="0.5" opacity="0">
-<animate attributeName="r" from="30" to="55" dur="2.5s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
+<svg width="300" height="140" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="cardB" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#1a0a00"/>
+<stop offset="100%" stop-color="#0d0d0d"/>
+</linearGradient>
+<filter id="cardGlowB">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="300" height="140" fill="url(#cardB)" stroke="#ff9500" stroke-width="1.5" rx="8" filter="url(#cardGlowB)"/>
+<rect x="1" y="1" width="298" height="138" fill="none" stroke="#ff9500" stroke-width="0.5" rx="7" opacity="0">
+<animate attributeName="opacity" values="0;0.8;0" dur="2.8s" repeatCount="indefinite"/>
+</rect>
+<text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#ff9500" filter="url(#cardGlowB)">STRATEGY B</text>
+<text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Leak, then ret2system</text>
+<text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">puts/printf available to leak libc</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#fbbf24" font-weight="bold">✅ LEAK REQUIRED</text>
+<path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#ff9500" opacity="0.6"/>
+<path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#ff9500" opacity="0.6"/>
+<circle cx="150" cy="70" r="50" fill="none" stroke="#ff9500" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="35" to="65" dur="3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/>
 </circle>
 </svg>
 
@@ -186,32 +309,60 @@ Battar detects which of four exploitation strategies apply and auto-forges a rea
 <tr>
 <td>
 
-<svg width="280" height="120" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
-<rect width="280" height="120" fill="#0d0d0d" stroke="#a855f7" stroke-width="1" rx="6"/>
-<text x="140" y="30" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#a855f7">STRATEGY C</text>
-<text x="140" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#ccc">Raw execve() syscall</text>
-<text x="140" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">"/bin/sh" + syscall gadgets in binary</text>
-<text x="140" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">❌ NO LIBC NEEDED</text>
-<!-- Pulse ring -->
-<circle cx="140" cy="60" r="45" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0">
-<animate attributeName="r" from="30" to="55" dur="2.2s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite"/>
+<svg width="300" height="140" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="cardC" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#0a001a"/>
+<stop offset="100%" stop-color="#0d0d0d"/>
+</linearGradient>
+<filter id="cardGlowC">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="300" height="140" fill="url(#cardC)" stroke="#a855f7" stroke-width="1.5" rx="8" filter="url(#cardGlowC)"/>
+<rect x="1" y="1" width="298" height="138" fill="none" stroke="#a855f7" stroke-width="0.5" rx="7" opacity="0">
+<animate attributeName="opacity" values="0;0.8;0" dur="2.2s" repeatCount="indefinite"/>
+</rect>
+<text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#a855f7" filter="url(#cardGlowC)">STRATEGY C</text>
+<text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">Raw execve() syscall</text>
+<text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">"/bin/sh" + syscall gadgets in binary</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LIBC NEEDED</text>
+<path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#a855f7" opacity="0.6"/>
+<path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#a855f7" opacity="0.6"/>
+<circle cx="150" cy="70" r="50" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="35" to="65" dur="2.7s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.5;0;0.5" dur="2.7s" repeatCount="indefinite"/>
 </circle>
 </svg>
 
 </td>
 <td>
 
-<svg width="280" height="120" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
-<rect width="280" height="120" fill="#0d0d0d" stroke="#06b6d4" stroke-width="1" rx="6"/>
-<text x="140" y="30" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#06b6d4">STRATEGY D</text>
-<text x="140" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#ccc">open→read→write flag chain</text>
-<text x="140" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">CTF flag + syscall gadgets + .bss</text>
-<text x="140" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">❌ NO LEAK NEEDED</text>
-<!-- Pulse ring -->
-<circle cx="140" cy="60" r="45" fill="none" stroke="#06b6d4" stroke-width="0.5" opacity="0">
-<animate attributeName="r" from="30" to="55" dur="2.8s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0.5;0;0.5" dur="2.8s" repeatCount="indefinite"/>
+<svg width="300" height="140" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="cardD" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#001a1a"/>
+<stop offset="100%" stop-color="#0d0d0d"/>
+</linearGradient>
+<filter id="cardGlowD">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="300" height="140" fill="url(#cardD)" stroke="#06b6d4" stroke-width="1.5" rx="8" filter="url(#cardGlowD)"/>
+<rect x="1" y="1" width="298" height="138" fill="none" stroke="#06b6d4" stroke-width="0.5" rx="7" opacity="0">
+<animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite"/>
+</rect>
+<text x="150" y="35" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#06b6d4" filter="url(#cardGlowD)">STRATEGY D</text>
+<text x="150" y="62" text-anchor="middle" font-family="monospace" font-size="12" fill="#ddd">open→read→write flag chain</text>
+<text x="150" y="88" text-anchor="middle" font-family="monospace" font-size="10" fill="#888">CTF flag + syscall gadgets + .bss</text>
+<text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">❌ NO LEAK NEEDED</text>
+<path d="M 10 10 L 30 10 L 30 14 L 14 14 L 14 30 L 10 30 Z" fill="#06b6d4" opacity="0.6"/>
+<path d="M 290 10 L 270 10 L 270 14 L 286 14 L 286 30 L 290 30 Z" fill="#06b6d4" opacity="0.6"/>
+<circle cx="150" cy="70" r="50" fill="none" stroke="#06b6d4" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="35" to="65" dur="3.2s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.5;0;0.5" dur="3.2s" repeatCount="indefinite"/>
 </circle>
 </svg>
 
@@ -233,87 +384,114 @@ Every forged exploit:
 
 ## 🎯 Dynamic Verification
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED EXECUTION PIPELINE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <div align="center">
 
-<svg width="700" height="320" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ECG HEARTBEAT PIPELINE -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<svg width="100%" height="360" viewBox="0 0 750 360" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;">
 <defs>
-<linearGradient id="pipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+<linearGradient id="ecgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
 <stop offset="0%" stop-color="#ff2a2a"/>
 <stop offset="100%" stop-color="#8b0000"/>
 </linearGradient>
-<filter id="textGlow">
-<feGaussianBlur stdDeviation="1" result="blur"/>
+<filter id="ecgGlow">
+<feGaussianBlur stdDeviation="2" result="blur"/>
 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
 </filter>
 </defs>
 
-<rect width="700" height="320" fill="#0a0a0a" rx="8"/>
+<rect width="750" height="360" fill="#0a0a0a" rx="10" stroke="#222" stroke-width="1"/>
 
-<!-- Pipeline connector line -->
-<line x1="60" y1="50" x2="60" y2="290" stroke="#333" stroke-width="2" stroke-dasharray="4,4"/>
+<!-- Grid lines -->
+<g stroke="#1a1a1a" stroke-width="0.5">
+<line x1="0" y1="60" x2="750" y2="60"/>
+<line x1="0" y1="120" x2="750" y2="120"/>
+<line x1="0" y1="180" x2="750" y2="180"/>
+<line x1="0" y1="240" x2="750" y2="240"/>
+<line x1="0" y1="300" x2="750" y2="300"/>
+<line x1="150" y1="0" x2="150" y2="360"/>
+<line x1="300" y1="0" x2="300" y2="360"/>
+<line x1="450" y1="0" x2="450" y2="360"/>
+<line x1="600" y1="0" x2="600" y2="360"/>
+</g>
 
-<!-- Step 1 -->
-<circle cx="60" cy="50" r="8" fill="#ff2a2a">
-<animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
-</circle>
-<text x="85" y="40" font-family="monospace" font-size="11" fill="#ff2a2a" font-weight="bold">[1]</text>
-<text x="85" y="55" font-family="monospace" font-size="11" fill="#ccc">Fuzz with De Bruijn cyclic patterns</text>
-<text x="85" y="70" font-family="monospace" font-size="10" fill="#666">→ Crash the target</text>
+<!-- ECG Line connecting all steps -->
+<path d="M 40 60 L 90 60 L 100 30 L 110 90 L 120 60 L 150 60
+L 160 60 L 170 30 L 180 90 L 190 60 L 220 60
+L 230 60 L 240 30 L 250 90 L 260 60 L 290 60
+L 300 60 L 310 30 L 320 90 L 330 60 L 360 60
+L 370 60 L 380 30 L 390 90 L 400 60 L 430 60
+L 440 60 L 450 30 L 460 90 L 470 60 L 500 60
+L 510 60 L 520 30 L 530 90 L 540 60 L 570 60
+L 580 60 L 590 30 L 600 90 L 610 60 L 640 60
+L 650 60 L 660 30 L 670 90 L 680 60 L 710 60"
+fill="none" stroke="#ff2a2a" stroke-width="2" filter="url(#ecgGlow)" opacity="0.8">
+<animate attributeName="stroke-dasharray" from="0,2000" to="2000,0" dur="3s" fill="freeze"/>
+<animate attributeName="opacity" values="0.8;0.4;0.8" dur="1.5s" begin="3s" repeatCount="indefinite"/>
+</path>
 
-<!-- Step 2 -->
-<circle cx="60" cy="100" r="6" fill="#ff6b35">
-<animate attributeName="r" values="6;8;6" dur="2.2s" repeatCount="indefinite"/>
+<!-- Step nodes with pulsing -->
+<g>
+<circle cx="75" cy="60" r="10" fill="#ff2a2a" filter="url(#ecgGlow)">
+<animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
 </circle>
-<text x="85" y="90" font-family="monospace" font-size="11" fill="#ff6b35" font-weight="bold">[2]</text>
-<text x="85" y="105" font-family="monospace" font-size="11" fill="#ccc">Read corefile</text>
-<text x="85" y="120" font-family="monospace" font-size="10" fill="#666">→ Extract exact overflow offset from registers</text>
+<text x="75" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff" font-weight="bold">1</text>
+<text x="75" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#ff2a2a">FUZZ</text>
+<text x="75" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">De Bruijn</text>
+</g>
 
-<!-- Step 3 -->
-<circle cx="60" cy="150" r="6" fill="#fbbf24">
-<animate attributeName="r" values="6;8;6" dur="2.4s" repeatCount="indefinite"/>
+<g>
+<circle cx="225" cy="60" r="10" fill="#ff6b35" filter="url(#ecgGlow)">
+<animate attributeName="r" values="10;14;10" dur="2.2s" repeatCount="indefinite"/>
 </circle>
-<text x="85" y="140" font-family="monospace" font-size="11" fill="#fbbf24" font-weight="bold">[3]</text>
-<text x="85" y="155" font-family="monospace" font-size="11" fill="#ccc">Distinguish real overflow from canary kill</text>
-<text x="85" y="170" font-family="monospace" font-size="10" fill="#666">→ SIGABRT detection, not generic failure</text>
+<text x="225" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff" font-weight="bold">2</text>
+<text x="225" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#ff6b35">CORE</text>
+<text x="225" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">Extract offset</text>
+</g>
 
-<!-- Step 4 -->
-<circle cx="60" cy="200" r="6" fill="#a855f7">
-<animate attributeName="r" values="6;8;6" dur="2.6s" repeatCount="indefinite"/>
+<g>
+<circle cx="375" cy="60" r="10" fill="#fbbf24" filter="url(#ecgGlow)">
+<animate attributeName="r" values="10;14;10" dur="2.4s" repeatCount="indefinite"/>
 </circle>
-<text x="85" y="190" font-family="monospace" font-size="11" fill="#a855f7" font-weight="bold">[4]</text>
-<text x="85" y="205" font-family="monospace" font-size="11" fill="#ccc">Forge exploit → run it → confirm shell/flag</text>
-<text x="85" y="220" font-family="monospace" font-size="10" fill="#666">→ Real code execution validation</text>
+<text x="375" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff" font-weight="bold">3</text>
+<text x="375" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#fbbf24">DETECT</text>
+<text x="375" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">Canary vs real</text>
+</g>
 
-<!-- Step 5 -->
-<circle cx="60" cy="250" r="6" fill="#4ade80">
-<animate attributeName="r" values="6;8;6" dur="2.8s" repeatCount="indefinite"/>
+<g>
+<circle cx="525" cy="60" r="10" fill="#a855f7" filter="url(#ecgGlow)">
+<animate attributeName="r" values="10;14;10" dur="2.6s" repeatCount="indefinite"/>
 </circle>
-<text x="85" y="240" font-family="monospace" font-size="11" fill="#4ade80" font-weight="bold">[5]</text>
-<text x="85" y="255" font-family="monospace" font-size="11" fill="#ccc">Auto-fix x86-64 movaps alignment crashes</text>
-<text x="85" y="270" font-family="monospace" font-size="10" fill="#666">→ Retry with alignment gadget, keep what works</text>
+<text x="525" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff" font-weight="bold">4</text>
+<text x="525" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#a855f7">VERIFY</text>
+<text x="525" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">Shell/flag check</text>
+</g>
 
-<!-- Animated data flow dots -->
-<circle cx="60" cy="50" r="2" fill="#ff2a2a" opacity="0">
-<animate attributeName="cy" from="50" to="290" dur="4s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0;1;1;0" dur="4s" repeatCount="indefinite"/>
+<g>
+<circle cx="675" cy="60" r="10" fill="#4ade80" filter="url(#ecgGlow)">
+<animate attributeName="r" values="10;14;10" dur="2.8s" repeatCount="indefinite"/>
 </circle>
-<circle cx="60" cy="50" r="2" fill="#ff2a2a" opacity="0">
-<animate attributeName="cy" from="50" to="290" dur="4s" begin="1.3s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0;1;1;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
-</circle>
-<circle cx="60" cy="50" r="2" fill="#ff2a2a" opacity="0">
-<animate attributeName="cy" from="50" to="290" dur="4s" begin="2.6s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="0;1;1;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
-</circle>
+<text x="675" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff" font-weight="bold">5</text>
+<text x="675" y="95" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">FIX</text>
+<text x="675" y="110" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">movaps align</text>
+</g>
 
-<!-- Status bar at bottom -->
-<rect x="20" y="295" width="0" height="3" fill="url(#pipeGrad)" rx="1.5">
-<animate attributeName="width" from="0" to="660" dur="8s" repeatCount="indefinite"/>
+<!-- Detail descriptions -->
+<text x="375" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">
+<tspan x="375" dy="0">Progressively longer cyclic patterns → crash target → read corefile</tspan>
+<tspan x="375" dy="20">Extract exact offset from clobbered registers (PC, RBP, general-purpose)</tspan>
+<tspan x="375" dy="20">Distinguish real overflow from canary-killed attempts via SIGABRT</tspan>
+<tspan x="375" dy="20">Forge exploit → execute → confirm shell response or flag content</tspan>
+<tspan x="375" dy="20">Auto-fix x86-64 movaps alignment with retry + alignment gadget</tspan>
+</text>
+
+<!-- Bottom status bar -->
+<rect x="30" y="330" width="0" height="4" fill="url(#ecgGrad)" rx="2">
+<animate attributeName="width" from="0" to="690" dur="6s" repeatCount="indefinite"/>
 </rect>
+<text x="375" y="320" text-anchor="middle" font-family="monospace" font-size="9" fill="#444">EXECUTION PIPELINE ACTIVE</text>
 </svg>
 
 </div>
@@ -450,49 +628,74 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED RISK GAUGE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <div align="center">
 
-### Risk Assessment Visualization
-
-<svg width="500" height="140" viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ANIMATED RISK GAUGE WITH PARTICLE BURST -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<svg width="100%" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
 <defs>
-<linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stop-color="#4ade80"/>
-<stop offset="50%" stop-color="#fbbf24"/>
-<stop offset="100%" stop-color="#ff2a2a"/>
+<linearGradient id="riskGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#22c55e"/>
+<stop offset="40%" stop-color="#eab308"/>
+<stop offset="70%" stop-color="#f97316"/>
+<stop offset="100%" stop-color="#dc2626"/>
 </linearGradient>
+<filter id="riskGlow">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
 </defs>
 
-<!-- Gauge background -->
-<rect x="50" y="60" width="400" height="20" fill="#1a1a1a" rx="10" stroke="#333" stroke-width="1"/>
+<rect width="600" height="180" fill="#0a0a0a" rx="10"/>
+
+<!-- Gauge track -->
+<rect x="50" y="80" width="500" height="24" fill="#1a1a1a" rx="12" stroke="#333" stroke-width="1"/>
 
 <!-- Animated fill -->
-<rect x="50" y="60" width="0" height="20" fill="url(#gaugeGrad)" rx="10">
-<animate attributeName="width" from="0" to="340" dur="2s" fill="freeze"/>
-<animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" begin="2s" repeatCount="indefinite"/>
+<rect x="50" y="80" width="0" height="24" fill="url(#riskGrad)" rx="12" filter="url(#riskGlow)">
+<animate attributeName="width" from="0" to="425" dur="2.5s" fill="freeze"/>
+<animate attributeName="opacity" values="0.9;1;0.9" dur="1s" begin="2.5s" repeatCount="indefinite"/>
 </rect>
 
+<!-- Tick marks -->
+<line x1="50" y1="110" x2="50" y2="118" stroke="#444" stroke-width="1"/>
+<line x1="216" y1="110" x2="216" y2="118" stroke="#444" stroke-width="1"/>
+<line x1="383" y1="110" x2="383" y2="118" stroke="#444" stroke-width="1"/>
+<line x1="550" y1="110" x2="550" y2="118" stroke="#444" stroke-width="1"/>
+
 <!-- Labels -->
-<text x="50" y="50" font-family="monospace" font-size="10" fill="#4ade80">LOW</text>
-<text x="230" y="50" font-family="monospace" font-size="10" fill="#fbbf24" text-anchor="middle">MEDIUM</text>
-<text x="430" y="50" font-family="monospace" font-size="10" fill="#ff2a2a" text-anchor="end">HIGH</text>
+<text x="50" y="135" font-family="monospace" font-size="10" fill="#22c55e">LOW</text>
+<text x="216" y="135" text-anchor="middle" font-family="monospace" font-size="10" fill="#eab308">MEDIUM</text>
+<text x="383" y="135" text-anchor="middle" font-family="monospace" font-size="10" fill="#f97316">HIGH</text>
+<text x="550" y="135" text-anchor="end" font-family="monospace" font-size="10" fill="#dc2626">CRITICAL</text>
 
 <!-- Animated needle -->
-<line x1="50" y1="70" x2="50" y2="70" stroke="#fff" stroke-width="2" stroke-linecap="round">
-<animate attributeName="x2" from="50" to="390" dur="2s" fill="freeze"/>
-</line>
-<circle cx="50" cy="70" r="4" fill="#fff">
-<animate attributeName="cx" from="50" to="390" dur="2s" fill="freeze"/>
+<polygon points="50,68 50,76 60,72" fill="#fff" opacity="0">
+<animate attributeName="points" from="50,68 50,76 60,72" to="465,68 465,76 475,72" dur="2.5s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2s" fill="freeze"/>
+</polygon>
+<circle cx="50" cy="72" r="5" fill="#fff" opacity="0">
+<animate attributeName="cx" from="50" to="465" dur="2.5s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2s" fill="freeze"/>
+<animate attributeName="r" values="5;7;5" dur="1s" begin="2.5s" repeatCount="indefinite"/>
 </circle>
 
-<!-- Result text -->
-<text x="250" y="115" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#ff2a2a" opacity="0">
-[ HIGH RISK ]
-<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.2s" fill="freeze"/>
-<animate attributeName="opacity" values="1;0.6;1" dur="1s" begin="3s" repeatCount="indefinite"/>
+<!-- Particle burst at needle position -->
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;0" dur="0.6s" begin="2.8s" repeatCount="indefinite"/>
+<circle cx="465" cy="55" r="2" fill="#ff2a2a"/>
+<circle cx="475" cy="50" r="1.5" fill="#ff6600"/>
+<circle cx="455" cy="48" r="2" fill="#ffcc00"/>
+<circle cx="470" cy="42" r="1" fill="#ff2a2a"/>
+<circle cx="460" cy="45" r="1.5" fill="#ff6600"/>
+</g>
+
+<!-- Result flash -->
+<text x="300" y="165" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#dc2626" opacity="0" filter="url(#riskGlow)">
+⚠ HIGH RISK DETECTED
+<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.7s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.4;1" dur="0.8s" begin="3.5s" repeatCount="indefinite"/>
 </text>
 </svg>
 
@@ -513,40 +716,89 @@ battar ./target_stripped --section build packer entropy dangerous gadgets --all
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- ANIMATED CLOSING SWORD -->
+<!-- EPIC FINAL: DUAL SWORD CLASH WITH SHOCKWAVE -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
-<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
 <defs>
-<linearGradient id="closeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stop-color="#ff2a2a"/>
-<stop offset="50%" stop-color="#fff"/>
-<stop offset="100%" stop-color="#ff2a2a"/>
-</linearGradient>
+<radialGradient id="shockGrad" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#ff2a2a" stop-opacity="0.8"/>
+<stop offset="50%" stop-color="#ff2a2a" stop-opacity="0.2"/>
+<stop offset="100%" stop-color="#ff2a2a" stop-opacity="0"/>
+</radialGradient>
+<filter id="finalGlow">
+<feGaussianBlur stdDeviation="5" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
 </defs>
 
-<!-- Sword blade -->
-<path d="M 30 60 Q 100 55, 150 40 Q 200 25, 270 20"
-fill="none" stroke="url(#closeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.8">
-<animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="2s" fill="freeze"/>
+<rect width="500" height="200" fill="#050505" rx="10"/>
+
+<!-- Shockwave rings -->
+<circle cx="250" cy="100" r="10" fill="none" stroke="#ff2a2a" stroke-width="1" opacity="0">
+<animate attributeName="r" from="10" to="120" dur="2s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+</circle>
+<circle cx="250" cy="100" r="10" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="10" to="120" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.6;0;0.6" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+</circle>
+<circle cx="250" cy="100" r="10" fill="none" stroke="#ff2a2a" stroke-width="0.5" opacity="0">
+<animate attributeName="r" from="10" to="120" dur="2s" begin="1.2s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0.4;0;0.4" dur="2s" begin="1.2s" repeatCount="indefinite"/>
+</circle>
+
+<!-- Left sword -->
+<path d="M 80 160 Q 160 130, 230 105 Q 240 100, 245 98"
+fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url(#finalGlow)" opacity="0">
+<animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="1s" begin="0.3s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.3s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="1.5s" repeatCount="indefinite"/>
 </path>
 
-<!-- Cross guard -->
-<line x1="25" y1="55" x2="40" y2="65" stroke="#ff2a2a" stroke-width="2">
-<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.5s" fill="freeze"/>
+<!-- Right sword -->
+<path d="M 420 160 Q 340 130, 270 105 Q 260 100, 255 98"
+fill="none" stroke="#ff2a2a" stroke-width="3" stroke-linecap="round" filter="url(#finalGlow)" opacity="0">
+<animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="1s" begin="0.5s" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.5s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="1.7s" repeatCount="indefinite"/>
+</path>
+
+<!-- Cross guards -->
+<line x1="75" y1="155" x2="90" y2="168" stroke="#ff2a2a" stroke-width="2" opacity="0">
+<animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.2s" fill="freeze"/>
 </line>
-<line x1="25" y1="65" x2="40" y2="55" stroke="#ff2a2a" stroke-width="2">
-<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.6s" fill="freeze"/>
+<line x1="75" y1="168" x2="90" y2="155" stroke="#ff2a2a" stroke-width="2" opacity="0">
+<animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.3s" fill="freeze"/>
+</line>
+<line x1="425" y1="155" x2="410" y2="168" stroke="#ff2a2a" stroke-width="2" opacity="0">
+<animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.2s" fill="freeze"/>
+</line>
+<line x1="425" y1="168" x2="410" y2="155" stroke="#ff2a2a" stroke-width="2" opacity="0">
+<animate attributeName="opacity" from="0" to="0.7" dur="0.3s" begin="1.3s" fill="freeze"/>
 </line>
 
-<!-- Spark at tip -->
-<circle cx="270" cy="20" r="3" fill="#ffcc00" opacity="0">
-<animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="2s" repeatCount="indefinite"/>
-<animate attributeName="r" values="2;5;2" dur="0.8s" begin="2s" repeatCount="indefinite"/>
-</circle>
+<!-- Impact burst -->
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;0" dur="0.5s" begin="1.4s" repeatCount="indefinite"/>
+<circle cx="250" cy="98" r="8" fill="#ffcc00" filter="url(#finalGlow)"/>
+<circle cx="260" cy="88" r="3" fill="#ff6600"/>
+<circle cx="240" cy="90" r="2.5" fill="#ffcc00"/>
+<circle cx="255" cy="85" r="2" fill="#ff3300"/>
+<circle cx="245" cy="92" r="2" fill="#ffcc00"/>
+<circle cx="265" cy="95" r="1.5" fill="#ff6600"/>
+<circle cx="235" cy="95" r="1.5" fill="#ff6600"/>
+</g>
+
+<!-- Closing text -->
+<text x="250" y="145" text-anchor="middle" font-family="monospace" font-size="14" fill="#ff2a2a" opacity="0" filter="url(#finalGlow)">
+Part of the Battar / بتّار red-core toolkit
+<animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.8s" fill="freeze"/>
+<animate attributeName="opacity" values="1;0.5;1" dur="4s" begin="3s" repeatCount="indefinite"/>
+</text>
+<text x="250" y="170" text-anchor="middle" font-family="monospace" font-size="11" fill="#666" opacity="0">
+Made for the ones who don't stop at recon.
+<animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.2s" fill="freeze"/>
+</text>
 </svg>
-
-**Part of the Battar red-core toolkit**
-
-*Made for the ones who don't stop at recon.*
 
 </div>
