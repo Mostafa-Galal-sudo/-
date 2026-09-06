@@ -10,6 +10,7 @@ Part of Battar red-core toolkit
 import sys
 import os
 import re
+import json
 import math
 import time
 import threading
@@ -18,6 +19,7 @@ import tempfile
 import contextlib
 import argparse
 import subprocess
+import shutil
 from pathlib import Path
 from collections import Counter
 from datetime import datetime, timezone
@@ -496,14 +498,88 @@ def get_text_section(elf_obj):
 
 
 def find_gadgets(data, base_addr, patterns):
-    """Search raw bytes for each (name, byte-pattern) and return {name: address}
-    for the first (lowest-address) occurrence of each."""
+    """Search raw bytes for each (name, byte-pattern) and return
+    {name: [addr1, addr2, ...]} — every occurrence, ascending by address,
+    not just the first. Uses a single compiled regex scan per pattern
+    instead of a manual find()-loop."""
     found = {}
     for name, pattern in patterns:
-        idx = data.find(pattern)
-        if idx != -1:
-            found[name] = base_addr + idx
+        addrs = [base_addr + m.start() for m in re.finditer(re.escape(pattern), data)]
+        if addrs:
+            found[name] = addrs
     return found
+
+
+def _first_gadget(gadgets, name):
+    """Convenience accessor: lowest address for a gadget name, or None."""
+    addrs = gadgets.get(name)
+    return addrs[0] if addrs else None
+
+
+_ROPGADGET_DUMP_CACHE = {}
+
+
+def _external_gadget_dump(binary_path, timeout=25):
+    """Fallback for when our own fixed byte-pattern list doesn't cover a
+    needed gadget: shell out to ROPgadget (or ropper) ONCE per binary,
+    parse every gadget it finds, and cache the result — so looking up
+    several missing gadget names against the same file only pays the
+    subprocess cost once."""
+    if binary_path in _ROPGADGET_DUMP_CACHE:
+        return _ROPGADGET_DUMP_CACHE[binary_path]
+
+    result = {}
+    rop_exe = shutil.which("ROPgadget")
+    ropper_exe = shutil.which("ropper")
+
+    try:
+        if rop_exe:
+            proc = subprocess.run([rop_exe, "--binary", binary_path, "--depth", "6"],
+                                   capture_output=True, text=True, timeout=timeout)
+            for line in proc.stdout.splitlines():
+                line = line.strip()
+                if " : " not in line:
+                    continue
+                addr_str, insn = line.split(" : ", 1)
+                try:
+                    addr = int(addr_str.strip(), 16)
+                except ValueError:
+                    continue
+                norm = "; ".join(p.strip() for p in insn.strip().rstrip(";").split(";") if p.strip())
+                result.setdefault(norm, []).append(addr)
+        elif ropper_exe:
+            proc = subprocess.run([ropper_exe, "--file", binary_path, "--nocolor"],
+                                   capture_output=True, text=True, timeout=timeout)
+            for line in proc.stdout.splitlines():
+                line = line.strip()
+                if ":" not in line or not line.startswith("0x"):
+                    continue
+                addr_str, insn = line.split(":", 1)
+                try:
+                    addr = int(addr_str.strip(), 16)
+                except ValueError:
+                    continue
+                norm = "; ".join(p.strip() for p in insn.strip().rstrip(";").split(";") if p.strip())
+                result.setdefault(norm, []).append(addr)
+    except Exception:
+        pass
+
+    for name in result:
+        result[name] = sorted(set(result[name]))
+
+    _ROPGADGET_DUMP_CACHE[binary_path] = result
+    return result
+
+
+def _first_gadget_with_fallback(gadgets, name, binary_path):
+    """Look up a gadget in our own fast byte-scan results first; only if
+    that comes up empty do we pay for an external ROPgadget/ropper pass."""
+    addr = _first_gadget(gadgets, name)
+    if addr is not None:
+        return addr, False
+    dump = _external_gadget_dump(binary_path)
+    addrs = dump.get(name)
+    return (addrs[0], True) if addrs else (None, False)
 
 
 def show_gadgets(elf, args, libc=None, summary=None):
@@ -513,7 +589,7 @@ def show_gadgets(elf, args, libc=None, summary=None):
     text_data, text_base = get_text_section(elf)
     binary_gadgets = find_gadgets(text_data, text_base, patterns) if text_data else {}
 
-    total_bin = len(binary_gadgets)
+    total_bin = sum(len(v) for v in binary_gadgets.values())
     if summary is not None:
         summary["gadgets_found"] = total_bin
 
@@ -521,10 +597,11 @@ def show_gadgets(elf, args, libc=None, summary=None):
         print(f"  {C.YELLOW}No .text section data available, or none of the common gadgets "
               f"were found in the binary itself{C.RESET}")
     else:
-        rows = sorted(binary_gadgets.items(), key=lambda x: x[1])
+        rows = sorted(((name, addr) for name, addrs in binary_gadgets.items() for addr in addrs),
+                       key=lambda x: x[1])
         total = len(rows)
         shown = rows if args.all else rows[:args.limit]
-        print(f"  {C.BOLD}{C.CYAN}From the binary itself (absolute address):{C.RESET}")
+        print(f"  {C.BOLD}{C.CYAN}From the binary itself (absolute address) — {total} total:{C.RESET}")
         print(f"  {C.BOLD}{'Address':<20}{'Gadget'}{C.RESET}")
         print(f"  {C.GRAY}{'-' * 50}{C.RESET}")
         for name, addr in shown:
@@ -539,10 +616,12 @@ def show_gadgets(elf, args, libc=None, summary=None):
         libc_text_data, libc_text_base = get_text_section(libc)
         libc_gadgets = find_gadgets(libc_text_data, libc_text_base, patterns) if libc_text_data else {}
         if libc_gadgets:
-            print(f"\n  {C.BOLD}{C.MAGENTA}From the resolved libc (offset — add libc.address at runtime):{C.RESET}")
-            rows = sorted(libc_gadgets.items(), key=lambda x: x[1])
+            rows = sorted(((name, addr) for name, addrs in libc_gadgets.items() for addr in addrs),
+                           key=lambda x: x[1])
             total = len(rows)
             shown = rows if args.all else rows[:args.limit]
+            print(f"\n  {C.BOLD}{C.MAGENTA}From the resolved libc (offset — add libc.address at "
+                  f"runtime) — {total} total:{C.RESET}")
             print(f"  {C.BOLD}{'Offset':<20}{'Gadget'}{C.RESET}")
             print(f"  {C.GRAY}{'-' * 50}{C.RESET}")
             for name, addr in shown:
@@ -558,7 +637,7 @@ def _attempt_offset_once(elf, pattern_len, timeout):
 
     p = None
     try:
-        p = process(elf.path)
+        p = process(elf.path, stderr=subprocess.STDOUT)
         payload = cyclic(pattern_len)
         p.sendline(payload)
 
@@ -579,6 +658,24 @@ def _attempt_offset_once(elf, pattern_len, timeout):
                            f"no crash, doesn't look vulnerable this way"), None
 
         sig = -status
+
+        if sig == 6:  # SIGABRT — glibc prints a specific reason, don't just guess "canary"
+            try:
+                tail = p.recvall(timeout=1)
+            except Exception:
+                tail = b""
+            if b"stack smashing detected" in tail:
+                return None, "SIGABRT: stack smashing detected — a stack canary caught the " \
+                              "overflow before the return address was reached", sig
+            if b"buffer overflow detected" in tail or b"*** buffer overflow" in tail:
+                return None, "SIGABRT: _FORTIFY_SOURCE caught an oversized write (e.g. a " \
+                              "*_chk-guarded sprintf/memcpy/strcpy) — different fix than a stack " \
+                              "canary: the bounds check triggered before any overflow happened", sig
+            if b"malloc" in tail.lower() or b"free(): " in tail or b"corrupted" in tail.lower():
+                return None, f"SIGABRT: looks like heap corruption was detected " \
+                              f"({tail.strip()[-120:]!r}), not a stack overflow", sig
+            return None, f"SIGABRT (not stack-smashing or FORTIFY — possibly a manual abort() " \
+                          f"or assertion): {tail.strip()[-120:]!r}", sig
 
         try:
             core = p.corefile
@@ -652,7 +749,7 @@ def find_offset_dynamic(path, elf, timeout=5, pattern_lens=(300, 600, 1500, 4000
     except Exception as e:
         return None, f"couldn't set up pwntools context: {e}"
 
-    saw_abort = False
+    saw_abort_msg = None
     last_msg = "no attempts made"
     for pattern_len in pattern_lens:
         try:
@@ -664,14 +761,12 @@ def find_offset_dynamic(path, elf, timeout=5, pattern_lens=(300, 600, 1500, 4000
         if offset is not None:
             return offset, f"{msg} (pattern length {pattern_len})"
 
-        if sig == 6:  # SIGABRT
-            saw_abort = True
+        if sig == 6:  # SIGABRT — _attempt_offset_once already worked out *why*
+            saw_abort_msg = msg
         last_msg = msg
 
-    if saw_abort:
-        return None, ("target aborted (SIGABRT) instead of segfaulting — this usually means a "
-                       "stack canary caught the overflow first. You'll need to leak/brute-force "
-                       "the canary before a raw offset overwrite like this will work")
+    if saw_abort_msg:
+        return None, saw_abort_msg
     return None, f"gave up after trying pattern lengths {list(pattern_lens)}: {last_msg}"
 
 
@@ -953,14 +1048,16 @@ def show_exploit_helper(path, elf, args, summary=None):
     text_data, text_base = get_text_section(elf)
     gadget_patterns = GADGET_PATTERNS_64 if bits == 64 else GADGET_PATTERNS_32
     bin_gadgets = find_gadgets(text_data, text_base, gadget_patterns) if text_data else {}
-    pop_rdi_bin = bin_gadgets.get("pop rdi; ret")
-    ret_gadget = bin_gadgets.get("ret")
+    pop_rdi_bin, pop_rdi_bin_fallback = _first_gadget_with_fallback(bin_gadgets, "pop rdi; ret", path)
+    ret_gadget = _first_gadget(bin_gadgets, "ret")
 
     pop_rdi_libc_offset = None
+    pop_rdi_libc_fallback = False
     if libc is not None and bits == 64:
         libc_text_data, libc_text_base = get_text_section(libc)
         libc_gadgets = find_gadgets(libc_text_data, libc_text_base, GADGET_PATTERNS_64) if libc_text_data else {}
-        pop_rdi_libc_offset = libc_gadgets.get("pop rdi; ret")
+        pop_rdi_libc_offset, pop_rdi_libc_fallback = _first_gadget_with_fallback(
+            libc_gadgets, "pop rdi; ret", libc.path)
 
     kv("system() in PLT", "Yes" if have_system else "No", C.GREEN if have_system else C.RED, key_width=26)
     kv("\"/bin/sh\" in binary", "Yes" if binsh_addr else "No", C.GREEN if binsh_addr else C.YELLOW, key_width=26)
@@ -971,6 +1068,10 @@ def show_exploit_helper(path, elf, args, summary=None):
     if bits == 64:
         kv("pop rdi; ret (binary)", hex(pop_rdi_bin) if pop_rdi_bin else "Not found", key_width=26,
            color=C.GREEN if pop_rdi_bin else C.YELLOW)
+        if pop_rdi_bin_fallback:
+            note("Not in our own byte-scan — found via ROPgadget/ropper fallback instead")
+        if pop_rdi_libc_fallback:
+            note("libc's pop rdi; ret also came from the ROPgadget/ropper fallback, not our own scan")
 
     if elf.pie:
         note("PIE is enabled — the addresses below are file-relative. You'll need a separate "
@@ -1020,20 +1121,27 @@ def show_exploit_helper(path, elf, args, summary=None):
     # gadgets otherwise.
     syscall_gadgets = {}
     syscall_mode = None
-    combo3 = bin_gadgets.get("pop rdi; pop rsi; pop rdx; ret")
-    pop_rax_g = bin_gadgets.get("pop rax; ret")
-    syscall_g = bin_gadgets.get("syscall")
+    syscall_gadgets_from_fallback = False
+    combo3, fb1 = _first_gadget_with_fallback(bin_gadgets, "pop rdi; pop rsi; pop rdx; ret", path)
+    pop_rax_g, fb2 = _first_gadget_with_fallback(bin_gadgets, "pop rax; ret", path)
+    syscall_g, fb3 = _first_gadget_with_fallback(bin_gadgets, "syscall", path)
     if bits == 64 and pop_rax_g and syscall_g:
         if combo3:
             syscall_gadgets = {"pop rax; ret": pop_rax_g, "combo3": combo3, "syscall": syscall_g}
             syscall_mode = "combined"
-        elif all(g in bin_gadgets for g in ("pop rdi; ret", "pop rsi; ret", "pop rdx; ret")):
-            syscall_gadgets = {
-                "pop rax; ret": pop_rax_g, "pop rdi; ret": bin_gadgets["pop rdi; ret"],
-                "pop rsi; ret": bin_gadgets["pop rsi; ret"], "pop rdx; ret": bin_gadgets["pop rdx; ret"],
-                "syscall": syscall_g,
-            }
-            syscall_mode = "individual"
+            syscall_gadgets_from_fallback = fb1 or fb2 or fb3
+        else:
+            rdi_g, fb4 = _first_gadget_with_fallback(bin_gadgets, "pop rdi; ret", path)
+            rsi_g, fb5 = _first_gadget_with_fallback(bin_gadgets, "pop rsi; ret", path)
+            rdx_g, fb6 = _first_gadget_with_fallback(bin_gadgets, "pop rdx; ret", path)
+            if rdi_g and rsi_g and rdx_g:
+                syscall_gadgets = {
+                    "pop rax; ret": pop_rax_g, "pop rdi; ret": rdi_g,
+                    "pop rsi; ret": rsi_g, "pop rdx; ret": rdx_g,
+                    "syscall": syscall_g,
+                }
+                syscall_mode = "individual"
+                syscall_gadgets_from_fallback = any((fb2, fb3, fb4, fb5, fb6))
 
     # Strategy C: raw execve("/bin/sh") — needs the syscall gadgets above plus
     # a "/bin/sh"-style string already sitting in the binary. execve() never
@@ -1049,7 +1157,8 @@ def show_exploit_helper(path, elf, args, summary=None):
     # buffer to read into.
     flag_addr, flag_name = (None, None)
     bss_addr = None
-    syscall_ret_g = bin_gadgets.get("syscall; ret")
+    syscall_ret_g, fb7 = _first_gadget_with_fallback(bin_gadgets, "syscall; ret", path)
+    syscall_gadgets_from_fallback = syscall_gadgets_from_fallback or fb7
     strategy_d_ready = False
     if syscall_mode and syscall_ret_g:
         flag_addr, flag_name = find_flag_filename(path, elf)
@@ -1241,6 +1350,9 @@ p.interactive()
         label = " (bonus alternative)" if strategy else ""
         print(f"\n  {C.BOLD}{C.GREEN}Strategy C{label}: raw execve(\"/bin/sh\") syscall chain "
               f"— no libc/system() needed{C.RESET}\n")
+        if syscall_gadgets_from_fallback:
+            note("One or more of these gadgets weren't in our own byte-scan — filled in via "
+                 "a ROPgadget/ropper fallback pass instead")
 
         if syscall_mode == "combined":
             script_c = f"""from pwn import *
@@ -1370,12 +1482,23 @@ print(p.recvall(timeout=3))
 
 
 def find_interesting_strings(rows):
+    # Repetitive/structured text (e.g. "aaaaaaaa...", "00000000...") can still
+    # match the blob-length regexes below without actually being a real
+    # hash/key/encoded-payload — gate those two specifically on entropy so
+    # only genuinely random-looking data gets flagged.
+    blob_min_entropy = {"HEX_BLOB": 2.5, "BASE64_BLOB": 3.5}
+
     matches = []
     for offset, text in rows:
         for tag, pattern in INTERESTING_PATTERNS:
-            if pattern.search(text):
-                matches.append((tag, offset, text))
-                break
+            m = pattern.search(text)
+            if not m:
+                continue
+            if tag in blob_min_entropy:
+                if shannon_entropy(m.group().encode()) < blob_min_entropy[tag]:
+                    continue  # too repetitive to be real random data — try other patterns
+            matches.append((tag, offset, text))
+            break
     return matches
 
 
@@ -1520,24 +1643,13 @@ def get_file_info(path):
 
 def extract_strings(path, min_len=4):
     """Pure-python equivalent of `strings <file>`: yields (offset, text) for
-    runs of printable ASCII bytes at least min_len long."""
-    printable = set(range(0x20, 0x7f)) | {0x09}  # space..~ plus tab
-    results = []
+    runs of printable ASCII bytes at least min_len long. Uses a single regex
+    pass over the whole buffer instead of a byte-by-byte Python loop."""
     with open(path, "rb") as f:
         data = f.read()
 
-    run_start = None
-    for i, b in enumerate(data):
-        if b in printable:
-            if run_start is None:
-                run_start = i
-        else:
-            if run_start is not None and i - run_start >= min_len:
-                results.append((run_start, data[run_start:i].decode("ascii", errors="ignore")))
-            run_start = None
-    if run_start is not None and len(data) - run_start >= min_len:
-        results.append((run_start, data[run_start:].decode("ascii", errors="ignore")))
-    return results
+    pattern = re.compile(rb"[\x20-\x7e\t]{%d,}" % max(1, min_len))
+    return [(m.start(), m.group().decode("ascii", errors="ignore")) for m in pattern.finditer(data)]
 
 
 FLAG_FILENAME_PATTERN = re.compile(r"(?i)\bflag[\w./-]{0,20}\b")
@@ -1949,13 +2061,118 @@ def analyze_pe(path, sections, args, summary):
 
 # ───────────────────────────── MAIN ─────────────────────────────
 
+def compute_risk_verdict(summary):
+    """Shared scoring logic used by both the text RISK SUMMARY and --json
+    output, so the two never drift out of sync."""
+    fmt = summary.get("format", "?")
+    score = 0
+
+    if fmt == "ELF":
+        if not summary.get("nx"):
+            score += 2
+        if not summary.get("pie"):
+            score += 1
+        if not summary.get("canary"):
+            score += 2
+        relro = summary.get("relro")
+        if relro is not None and relro != "Full":
+            score += 1
+    elif fmt == "PE":
+        if not summary.get("aslr"):
+            score += 1
+        if not summary.get("dep"):
+            score += 2
+        if not summary.get("cfg"):
+            score += 1
+
+    if "entropy" in summary and summary["entropy"] >= 7.2:
+        score += 1
+    if summary.get("packer_findings"):
+        score += 2
+    if "dangerous_count" in summary:
+        sev_points = {"CRITICAL": 3, "HIGH": 2, "MEDIUM": 1, "LOW": 0}
+        score += sev_points.get(summary.get("dangerous_top"), 0)
+    if summary.get("interesting_count"):
+        score += 1
+    strat = summary.get("exploit_strategy")
+    if strat == "A":
+        score += 2
+    elif strat in ("B", "C", "D"):
+        score += 1
+
+    if score <= 2:
+        verdict = "LOW"
+    elif score <= 5:
+        verdict = "MEDIUM"
+    else:
+        verdict = "HIGH"
+    return score, verdict
+
+
+def build_json_report(path, summary):
+    """A clean, machine-readable dict for --json — meant to be piped
+    straight into a pentest-report generator or another tool."""
+    score, verdict = compute_risk_verdict(summary)
+    exploit_labels = {
+        "A": "ret2system (direct, no leak)",
+        "B": "ret2libc (leak needed)",
+        "C": "execve syscall chain (no libc needed)",
+        "D": "open/read/write flag chain (no libc needed)",
+        None: None,
+    }
+    report = {
+        "file": os.path.abspath(path),
+        "format": summary.get("format"),
+        "protections": {},
+        "risk": {
+            "score": score,
+            "verdict": verdict,
+        },
+    }
+
+    if summary.get("format") == "ELF":
+        report["protections"] = {
+            "nx": summary.get("nx"),
+            "pie": summary.get("pie"),
+            "canary": summary.get("canary"),
+            "relro": summary.get("relro"),
+            "stripped": summary.get("stripped"),
+        }
+    elif summary.get("format") == "PE":
+        report["protections"] = {
+            "aslr": summary.get("aslr"),
+            "dep": summary.get("dep"),
+            "cfg": summary.get("cfg"),
+        }
+
+    if "entropy" in summary:
+        report["entropy"] = summary["entropy"]
+    if "packer_findings" in summary:
+        report["packer_findings"] = summary["packer_findings"]
+    if "dangerous_count" in summary:
+        report["dangerous_functions"] = {
+            "count": summary["dangerous_count"],
+            "highest_severity": summary.get("dangerous_top"),
+        }
+    if "interesting_count" in summary:
+        report["interesting_strings"] = summary["interesting_count"]
+    if "gadgets_found" in summary:
+        report["gadgets_found"] = summary["gadgets_found"]
+    if "exploit_strategy" in summary:
+        strat = summary["exploit_strategy"]
+        report["exploit"] = {
+            "strategy": strat,
+            "description": exploit_labels.get(strat),
+        }
+
+    return report
+
+
 def show_summary(summary):
     banner("RISK SUMMARY")
 
     fmt = summary.get("format", "?")
     print(f"  {C.BOLD}{C.GRAY}{'Format':<18}{C.RESET}{C.BOLD}{C.BLUE}{fmt}{C.RESET}")
-
-    score = 0
 
     if fmt == "ELF":
         checks = [
@@ -1966,14 +2183,10 @@ def show_summary(summary):
         for label, enabled, penalty in checks:
             mark = f"{C.GREEN}✓ Enabled{C.RESET}" if enabled else f"{C.RED}✗ Disabled{C.RESET}"
             print(f"  {C.BOLD}{C.GRAY}{label:<18}{C.RESET}{mark}")
-            if not enabled:
-                score += penalty
         relro = summary.get("relro")
         if relro is not None:
             relro_color = C.GREEN if relro == "Full" else (C.YELLOW if relro == "Partial" else C.RED)
             print(f"  {C.BOLD}{C.GRAY}{'RELRO':<18}{C.RESET}{relro_color}{relro}{C.RESET}")
-            if relro != "Full":
-                score += 1
         if summary.get("stripped"):
             print(f"  {C.BOLD}{C.GRAY}{'Stripped':<18}{C.RESET}{C.YELLOW}Yes{C.RESET}")
 
@@ -1986,22 +2199,16 @@ def show_summary(summary):
         for label, enabled, penalty in checks:
             mark = f"{C.GREEN}✓ Enabled{C.RESET}" if enabled else f"{C.RED}✗ Disabled{C.RESET}"
             print(f"  {C.BOLD}{C.GRAY}{label:<18}{C.RESET}{mark}")
-            if not enabled:
-                score += penalty
 
     if "entropy" in summary:
         overall = summary["entropy"]
         print(f"  {C.BOLD}{C.GRAY}{'Entropy':<18}{C.RESET}{entropy_bar(overall, width=16)} "
               f"{overall:.2f}/8.00")
-        if overall >= 7.2:
-            score += 1
 
     if "packer_findings" in summary:
         count = summary["packer_findings"]
         color = C.RED if count else C.GREEN
         print(f"  {C.BOLD}{C.GRAY}{'Packer signals':<18}{C.RESET}{color}{count} finding(s){C.RESET}")
-        if count:
-            score += 2
 
     if "dangerous_count" in summary:
         count = summary["dangerous_count"]
@@ -2009,33 +2216,22 @@ def show_summary(summary):
         color = C.GREEN if count == 0 else C.RED
         extra = f"  (highest: {badge(top)})" if top else ""
         print(f"  {C.BOLD}{C.GRAY}{'Dangerous funcs':<18}{C.RESET}{color}{count} found{C.RESET}{extra}")
-        sev_points = {"CRITICAL": 3, "HIGH": 2, "MEDIUM": 1, "LOW": 0}
-        score += sev_points.get(top, 0)
 
     if "interesting_count" in summary:
         count = summary["interesting_count"]
         color = C.YELLOW if count else C.GREEN
         print(f"  {C.BOLD}{C.GRAY}{'Interesting hits':<18}{C.RESET}{color}{count} flagged{C.RESET}")
-        if count:
-            score += 1
 
     if "exploit_strategy" in summary:
         strat = summary["exploit_strategy"]
         label = {"A": "ret2system (direct, no leak)", "B": "ret2libc (leak needed)",
+                  "C": "execve syscall chain", "D": "open/read/write flag chain",
                   None: "none found"}.get(strat, "none found")
-        color = C.RED if strat == "A" else (C.YELLOW if strat == "B" else C.GREEN)
+        color = C.RED if strat == "A" else (C.YELLOW if strat in ("B", "C", "D") else C.GREEN)
         print(f"  {C.BOLD}{C.GRAY}{'Exploit path':<18}{C.RESET}{color}{label}{C.RESET}")
-        if strat == "A":
-            score += 2
-        elif strat == "B":
-            score += 1
 
-    if score <= 2:
-        verdict, vcolor = "LOW", C.GREEN
-    elif score <= 5:
-        verdict, vcolor = "MEDIUM", C.YELLOW
-    else:
-        verdict, vcolor = "HIGH", C.RED
+    score, verdict = compute_risk_verdict(summary)
+    vcolor = {"LOW": C.GREEN, "MEDIUM": C.YELLOW, "HIGH": C.RED}[verdict]
 
     print(f"\n  {C.BOLD}{C.GRAY}{'Overall verdict':<18}{C.RESET}{C.BOLD}{vcolor}[ {verdict} RISK ]{C.RESET}")
     note("Score only reflects the sections you actually ran — add --section entropy packer "
@@ -2088,17 +2284,26 @@ def parse_args():
         "--auto-offset-timeout", type=_positive_int(1), default=5, metavar="SECONDS",
         help="How long to wait for the target to crash during --auto-offset (default: 5)"
     )
+    parser.add_argument(
+        "--json", action="store_true",
+        help="Print the risk summary as a single JSON object instead of colored terminal "
+             "output — for piping into a report generator or another tool"
+    )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
 
-    intro_banner()
+    if not args.json:
+        intro_banner()
 
     path = args.binary
     if not os.path.isfile(path):
-        print(f"{C.RED}[!] File not found: {path}{C.RESET}")
+        if args.json:
+            print(json.dumps({"error": f"file not found: {path}"}, indent=2))
+        else:
+            print(f"{C.RED}[!] File not found: {path}{C.RESET}")
         sys.exit(1)
 
     sections = set(args.section) if args.section else set(ALL_SECTIONS)
@@ -2111,15 +2316,16 @@ def main():
     # genuine file descriptor (.fileno()) for some of its terminal setup.
     tmp = tempfile.TemporaryFile(mode="w+", encoding="utf-8")
     captured = ""
+    summary = {}
 
-    anim.start()
+    if not args.json:
+        anim.start()
     try:
         with contextlib.redirect_stdout(tmp):
             print(f"{C.BOLD}{C.YELLOW}battar — {os.path.basename(path)}{C.RESET}")
 
             get_file_info(path)
 
-            summary = {}
             ftype = detect_filetype(path)
             if ftype == "ELF":
                 analyze_elf(path, sections, args, summary)
@@ -2141,8 +2347,15 @@ def main():
             pass
         tmp.close()
         anim.stop()
-        real_stdout.write(captured)
-        real_stdout.flush()
+        if args.json:
+            if exit_code:
+                print(json.dumps({"error": "unsupported format — only ELF and PE (exe) are supported"},
+                                  indent=2))
+            else:
+                print(json.dumps(build_json_report(path, summary), indent=2))
+        else:
+            real_stdout.write(captured)
+            real_stdout.flush()
 
     if exit_code:
         sys.exit(exit_code)
